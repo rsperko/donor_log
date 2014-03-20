@@ -1,4 +1,5 @@
 from django.db import models
+import datetime
 
 # Create your models here.
 class Donor(models.Model):
@@ -48,7 +49,7 @@ class Address(models.Model):
 
 class Donation(models.Model):
     donor = models.ForeignKey(Donor)
-    date = models.DateField(auto_now_add=True)
+    date = models.DateField(default=datetime.date.today)
     monetary_amount = models.DecimalField(decimal_places=2, max_digits=8)
     in_kind = models.BooleanField()
     notes = models.TextField()
@@ -63,7 +64,7 @@ class DonorContact(models.Model):
         (PHONE, 'Phone')
     )
     donor = models.ForeignKey(Donor)
-    date_time = models.DateTimeField(auto_now_add=True)
+    date_time = models.DateTimeField(default=datetime.datetime.now())
     type = models.CharField(max_length=1,
                             choices=CONTACT_TYPES,
                             default=PHONE)
