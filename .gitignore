@@ -2,7 +2,6 @@
 *.pyc
 staticfiles
 secret_key.py
-settings_prod.py
 *.iml
 *.sqlite3
 venv
