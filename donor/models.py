@@ -1,0 +1,46 @@
+from django.db import models
+
+# Create your models here.
+class Donor(models.Model):
+    added = models.DateField(auto_now_add=True)
+    first_name = models.CharField(max_length=50)
+    last_name = models.CharField(max_length=50)
+    institution_name = models.CharField(max_length=100, blank=True)
+    notes = models.TextField()
+
+class Email(models.Model):
+    donor = models.ForeignKey(Donor)
+    preferred = models.BooleanField('preferred address')
+    email = models.EmailField()
+
+class Address(models.Model):
+    donor = models.ForeignKey(Donor)
+    preferred = models.BooleanField('preferred address')
+    care_of = models.CharField(max_length=100)
+    line1 = models.CharField(max_length=100)
+    line2 = models.CharField(max_length=100)
+    city = models.CharField(max_length=50)
+    state = models.CharField(max_length=2)
+    postalCode = models.CharField(max_length=10)
+
+class Donation(models.Model):
+    donor = models.ForeignKey(Donor)
+    date = models.DateField(auto_now_add=True)
+    monetary_amount = models.DecimalField(decimal_places=2, max_digits=8)
+    notes = models.TextField()
+
+class DonorContact(models.Model):
+    PHONE = 'P'
+    EMAIL = 'E'
+    IN_PERSON = 'I'
+    CONTACT_TYPES = (
+        (EMAIL, 'E-mail'),
+        (IN_PERSON, 'In-Person'),
+        (PHONE, 'Phone')
+    )
+    donor = models.ForeignKey(Donor)
+    date_time = models.DateTimeField(auto_now_add=True)
+    type = models.CharField(max_length=1,
+                            choices=CONTACT_TYPES,
+                            default=PHONE)
+    notes = models.TextField()
