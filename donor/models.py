@@ -9,6 +9,16 @@ class Donor(models.Model):
         (DONOR, 'Donor'),
         (PARTNER, 'Partner')
     )
+    CATEGORY_INDIVIDUAL = 'I'
+    CATEGORY_BUSINESS = 'B'
+    CATEGORY_NON_PROFIT = 'N'
+    CATEGORY_FOUNDATION = 'F'
+    CATEGORIES = (
+        (CATEGORY_BUSINESS, 'Business'),
+        (CATEGORY_FOUNDATION, 'Foundation'),
+        (CATEGORY_INDIVIDUAL, 'Individual'),
+        (CATEGORY_NON_PROFIT, 'Non-Profit')
+    )
     added = models.DateField(auto_now_add=True)
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
@@ -16,6 +26,9 @@ class Donor(models.Model):
     type = models.CharField(max_length=1,
                             choices=DONOR_TYPES,
                             default=DONOR)
+    category = models.CharField(max_length=1,
+                                choices=CATEGORIES,
+                                default=CATEGORY_INDIVIDUAL)
     email = models.EmailField()
     notes = models.TextField()
 
@@ -48,10 +61,27 @@ class Address(models.Model):
     postalCode = models.CharField(max_length=10)
 
 class Donation(models.Model):
+    FURNITURE = 'F'
+    CLOTHING = 'C'
+    HOUSEHOLD_ITEM = 'H'
+    FOOD = 'D'
+    MONEY = 'M'
+    OTHER = 'O'
+    DONATION_TYPES = (
+        (CLOTHING, 'Clothing'),
+        (FOOD, 'Food'),
+        (FURNITURE, 'Furniture'),
+        (HOUSEHOLD_ITEM, 'Household Items'),
+        (MONEY, 'Money'),
+        (OTHER, 'Other')
+    )
     donor = models.ForeignKey(Donor)
     date = models.DateField(default=datetime.date.today)
     monetary_amount = models.DecimalField(decimal_places=2, max_digits=8)
     in_kind = models.BooleanField()
+    type = models.CharField(max_length=1,
+                            choices=DONATION_TYPES,
+                            default=HOUSEHOLD_ITEM)
     notes = models.TextField()
 
 class DonorContact(models.Model):
