@@ -25,9 +25,9 @@ class Donor(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     institution_name = models.CharField(max_length=100, blank=True)
-    # category = models.CharField(max_length=1,
-    #                             choices=CATEGORIES,
-    #                             default=CATEGORY_INDIVIDUAL)
+    category = models.CharField(max_length=1,
+                                choices=CATEGORIES,
+                                default=CATEGORY_INDIVIDUAL)
     email = models.EmailField()
     notes = models.TextField()
     type = models.CharField(max_length=1,
@@ -82,9 +82,9 @@ class Donation(models.Model):
     monetary_amount = models.DecimalField(decimal_places=2,
                                           max_digits=8)
     in_kind = models.BooleanField()
-    # type = models.CharField(max_length=1,
-    #                         choices=DONATION_TYPES,
-    #                         default=HOUSEHOLD_ITEM)
+    type = models.CharField(max_length=1,
+                            choices=TYPES,
+                            default=TYPE_HOUSEHOLD_ITEM)
     notes = models.TextField()
 
 class DonorContact(models.Model):
