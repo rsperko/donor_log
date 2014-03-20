@@ -18,6 +18,7 @@ class DonorContactInline(admin.StackedInline):
     extra = 0
 
 class DonorAdmin(admin.ModelAdmin):
+    list_display = ('institution_name', 'last_name', 'first_name', 'type', 'email', 'added')
     fieldsets = [
 
     ]
