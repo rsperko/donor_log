@@ -6,12 +6,26 @@ class Donor(models.Model):
     first_name = models.CharField(max_length=50)
     last_name = models.CharField(max_length=50)
     institution_name = models.CharField(max_length=100, blank=True)
+    email = models.EmailField()
     notes = models.TextField()
 
-class Email(models.Model):
+class Phone(models.Model):
+    HOME = 'H'
+    MOBILE = 'M'
+    WORK = 'W'
+    OTHER = 'O'
+    PHONE_TYPES = (
+        (HOME, 'Home'),
+        (MOBILE, 'Mobile'),
+        (WORK, 'Work'),
+        (OTHER, 'Other')
+    )
     donor = models.ForeignKey(Donor)
-    preferred = models.BooleanField('preferred address')
-    email = models.EmailField()
+    preferred = models.BooleanField()
+    number = models.CharField(max_length=12)
+    type = models.CharField(max_length=1,
+                            choices=PHONE_TYPES,
+                            default=MOBILE)
 
 class Address(models.Model):
     donor = models.ForeignKey(Donor)

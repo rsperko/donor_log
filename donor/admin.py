@@ -1,8 +1,8 @@
 from django.contrib import admin
-from donor.models import Donor, Email, Address, Donation, DonorContact
+from donor.models import Donor, Phone, Address, Donation, DonorContact
 
-class EmailInline(admin.StackedInline):
-    model = Email
+class PhoneInline(admin.StackedInline):
+    model = Phone
     extra = 0
 
 class AddressInline(admin.StackedInline):
@@ -22,7 +22,7 @@ class DonorAdmin(admin.ModelAdmin):
 
     ]
     inlines = [
-        EmailInline,
+        PhoneInline,
         AddressInline,
         DonationInline,
         DonorContactInline,
