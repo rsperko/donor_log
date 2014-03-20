@@ -11,4 +11,11 @@ import os
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mhvi.settings")
 
 from django.core.wsgi import get_wsgi_application
-application = get_wsgi_application()
+from django.conf import settings
+
+
+if settings.IN_PROD == True:
+    from dj_static import Cling
+    application = Cling(get_wsgi_application())
+else:
+    application = get_wsgi_application()

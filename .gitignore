@@ -6,3 +6,4 @@ settings_prod.py
 *.iml
 *.sqlite3
 venv
+dumpdata.sql
