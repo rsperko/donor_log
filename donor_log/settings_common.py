@@ -1,5 +1,5 @@
 """
-Django settings for mhvi project.
+Django settings for donor_log project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/
@@ -45,9 +45,9 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 )
 
-ROOT_URLCONF = 'mhvi.urls'
+ROOT_URLCONF = 'donor_log.urls'
 
-WSGI_APPLICATION = 'mhvi.wsgi.application'
+WSGI_APPLICATION = 'donor_log.wsgi.application'
 
 
 # Internationalization

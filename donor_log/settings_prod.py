@@ -1,5 +1,5 @@
 """
-Django settings for mhvi project.
+Django settings for donor_log project.
 
 For more information on this file, see
 https://docs.djangoproject.com/en/1.6/topics/settings/

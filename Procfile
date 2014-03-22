@@ -1,1 +1,1 @@
-web: gunicorn mhvi.wsgi
+web: gunicorn donor_log.wsgi

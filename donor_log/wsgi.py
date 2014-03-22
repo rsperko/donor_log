@@ -1,5 +1,5 @@
 """
-WSGI config for mhvi project.
+WSGI config for donor_log project.
 
 It exposes the WSGI callable as a module-level variable named ``application``.
 
@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/1.6/howto/deployment/wsgi/
 """
 
 import os
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mhvi.settings")
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "donor_log.settings")
 
 from django.core.wsgi import get_wsgi_application
 from django.conf import settings

@@ -5,7 +5,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     # Examples:
-    # url(r'^$', 'mhvi.views.home', name='home'),
+    # url(r'^$', 'donor_log.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
     url(r'^donors/', include('donor.urls')),
