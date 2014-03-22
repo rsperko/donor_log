@@ -10,7 +10,6 @@ class DonationSerializer(serializers.ModelSerializer):
             'id',
             'date',
             'monetary_amount',
-            'in_kind',
             'type',
             'notes',
         )

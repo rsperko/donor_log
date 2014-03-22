@@ -36,3 +36,25 @@ class Service(models.Model):
                             choices=TYPES,
                             default=TYPE_HOUSEHOLD_ITEM)
     notes = models.TextField(blank=True)
+
+
+class FamilyMember(models.Model):
+    TYPE_CHILD = 'C',
+    TYPE_SPOUSE = 'S',
+    TYPE_PARENT = 'P',
+    TYPE_SIBLING = 'I',
+    TYPES = (
+        (TYPE_CHILD, 'Child'),
+        (TYPE_SPOUSE, 'Spouse'),
+        (TYPE_PARENT, 'Parent'),
+        (TYPE_SIBLING, 'Sibling'),
+    )
+    client = models.ForeignKey(ClientInformation, related_name='family_members')
+    type = models.CharField(max_length=1,
+                            choices=TYPES,
+                            default=TYPE_CHILD)
+    name = models.CharField(max_length=100,
+                            blank=True,
+                            null=True)
+    birth_date = models.DateField(null=True,
+                            blank=True)

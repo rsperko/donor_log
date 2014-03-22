@@ -37,12 +37,14 @@ class Donation(models.Model):
     TYPE_FOOD = 'D'
     TYPE_MONEY = 'M'
     TYPE_OTHER = 'O'
+    TYPE_IN_KIND = 'I'
     TYPES = (
         (TYPE_CLOTHING, 'Clothing'),
         (TYPE_FOOD, 'Food'),
         (TYPE_FURNITURE, 'Furniture'),
         (TYPE_HOUSEHOLD_ITEM, 'Household Items'),
         (TYPE_MONEY, 'Money'),
+        (TYPE_IN_KIND, 'In-Kind'),
         (TYPE_OTHER, 'Other - see notes')
     )
     donor = models.ForeignKey(DonorInformation, related_name='donations')
@@ -50,7 +52,6 @@ class Donation(models.Model):
     monetary_amount = models.DecimalField(decimal_places=2,
                                           max_digits=8,
                                           blank=True)
-    in_kind = models.BooleanField()
     type = models.CharField(max_length=1,
                             choices=TYPES,
                             default=TYPE_HOUSEHOLD_ITEM)

@@ -8,10 +8,16 @@ class ServiceInline(admin.TabularInline):
     extra = 0
 
 
+class FamilyMemberInline(admin.TabularInline):
+    model = FamilyMember
+    extra = 0
+
+
 class ClientInformationAdmin(admin.ModelAdmin):
     list_display = ('type',)
     fieldsets = []
     inlines = [
+        FamilyMemberInline,
         ServiceInline,
     ]
 
