@@ -2,6 +2,8 @@ from django.db import models
 import datetime
 
 # Create your models here.
+
+
 class DonorInformation(models.Model):
     TYPE_DONOR = 'D'
     TYPE_PARTNER = 'P'
@@ -21,7 +23,6 @@ class DonorInformation(models.Model):
         (CATEGORY_NON_PROFIT, 'Non-Profit'),
         (CATEGORY_OTHER, 'Other - see notes')
     )
-    entity = models.OneToOneField(Entity)
     category = models.CharField(max_length=1,
                                 choices=CATEGORIES,
                                 default=CATEGORY_INDIVIDUAL)
@@ -47,9 +48,10 @@ class Donation(models.Model):
     donor = models.ForeignKey(DonorInformation, related_name='donations')
     date = models.DateField(default=datetime.date.today)
     monetary_amount = models.DecimalField(decimal_places=2,
-                                          max_digits=8)
+                                          max_digits=8,
+                                          blank=True)
     in_kind = models.BooleanField()
     type = models.CharField(max_length=1,
                             choices=TYPES,
                             default=TYPE_HOUSEHOLD_ITEM)
-    notes = models.TextField()
+    notes = models.TextField(blank=True)

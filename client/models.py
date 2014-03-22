@@ -2,8 +2,6 @@ from django.db import models
 
 import datetime
 
-from entity.models import Entity
-
 # Create your models here.
 
 # Create your models here.
@@ -14,10 +12,10 @@ class ClientInformation(models.Model):
         (TYPE_INDIVIDUAL, 'Individual'),
         (TYPE_FAMILY, 'Family'),
     )
-    entity = models.OneToOneField(Entity)
     type = models.CharField(max_length=1,
                             choices=TYPES,
                             default=TYPE_INDIVIDUAL)
+
 
 class Service(models.Model):
     TYPE_FURNITURE = 'F'
@@ -37,4 +35,4 @@ class Service(models.Model):
     type = models.CharField(max_length=1,
                             choices=TYPES,
                             default=TYPE_HOUSEHOLD_ITEM)
-    notes = models.TextField()
+    notes = models.TextField(blank=True)

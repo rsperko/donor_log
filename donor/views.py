@@ -1,7 +1,7 @@
 from django.shortcuts import render
-from donor.models import Donor
+from donor.models import DonorInformation
 from rest_framework import viewsets
-from donor.serializers import DonorSerializer
+from donor.serializers import DonorInformationSerializer
 
 # ViewSets define the view behavior.
 # class DonorViewSet(viewsets.ModelViewSet):
@@ -10,6 +10,6 @@ from donor.serializers import DonorSerializer
 
 
 # Create your views here.
-class DonorViewSet(viewsets.ModelViewSet):
-    queryset = Donor.objects.all()
-    serializer_class = DonorSerializer
+class DonorInformationViewSet(viewsets.ModelViewSet):
+    queryset = DonorInformation.objects.all()
+    serializer_class = DonorInformationSerializer
