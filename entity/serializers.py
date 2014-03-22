@@ -4,6 +4,7 @@ from rest_framework import serializers
 from entity.models import Entity, Phone, Address, Contact
 from donor.serializers import DonorInformationSerializer
 from client.serializers import ClientInformationSerializer
+from volunteer.serializers import VolunteerInformationSerializer
 
 
 class PhoneSerializer(serializers.ModelSerializer):
@@ -49,6 +50,7 @@ class EntitySerializer(serializers.ModelSerializer):
     contacts = ContactSerializer(many=True)
     donor_information = DonorInformationSerializer()
     client_information = ClientInformationSerializer()
+    volunteer_information = VolunteerInformationSerializer()
 
     class Meta:
         model = Entity

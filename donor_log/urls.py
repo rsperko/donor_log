@@ -11,12 +11,14 @@ from entity.views import EntityViewSet
 from client.views import ClientInformationViewSet
 from donor.views import DonorInformationViewSet
 from meta_data.views import MetaDataViewSet
+from volunteer.views import VolunteerInformationViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
 router.register(r'entity', EntityViewSet)
 router.register(r'donors', DonorInformationViewSet)
 router.register(r'client', ClientInformationViewSet)
+router.register(r'volunteer', VolunteerInformationViewSet)
 
 urlpatterns = patterns('',
     # Examples:

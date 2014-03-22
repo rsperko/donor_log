@@ -2,6 +2,7 @@ from django.db import models
 import datetime
 from donor.models import DonorInformation
 from client.models import ClientInformation
+from volunteer.models import VolunteerInformation
 
 # Create your models here.
 
@@ -29,6 +30,10 @@ class Entity(models.Model):
                                               null=True,
                                               blank=True,
                                               related_name='client_information')
+    volunteer_information = models.OneToOneField(VolunteerInformation,
+                                              null=True,
+                                              blank=True,
+                                              related_name='volunteer_information')
     active = models.BooleanField(default=True)
 
     def name(self):

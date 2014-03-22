@@ -41,6 +41,7 @@ INSTALLED_APPS = (
     'entity',
     'client',
     'donor',
+    'volunteer',
 )
 
 MIDDLEWARE_CLASSES = (
