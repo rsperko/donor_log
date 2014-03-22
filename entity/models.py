@@ -93,3 +93,9 @@ class Contact(models.Model):
                             choices=TYPES,
                             default=TYPE_PHONE)
     notes = models.TextField()
+
+
+META_DATA = (
+    'PHONE', ('TYPES', Phone.TYPES),
+    'CONTACT', ('TYPES', Contact.TYPES),
+)

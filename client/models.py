@@ -5,6 +5,8 @@ import datetime
 # Create your models here.
 
 # Create your models here.
+
+
 class ClientInformation(models.Model):
     TYPE_INDIVIDUAL = 'I'
     TYPE_FAMILY = 'F'
@@ -39,15 +41,21 @@ class Service(models.Model):
 
 
 class FamilyMember(models.Model):
-    TYPE_CHILD = 'C',
-    TYPE_SPOUSE = 'S',
-    TYPE_PARENT = 'P',
-    TYPE_SIBLING = 'I',
+    TYPE_CHILD = 'C'
+    TYPE_SPOUSE = 'S'
+    TYPE_PARENT = 'P'
+    TYPE_SIBLING = 'I'
     TYPES = (
         (TYPE_CHILD, 'Child'),
         (TYPE_SPOUSE, 'Spouse'),
         (TYPE_PARENT, 'Parent'),
         (TYPE_SIBLING, 'Sibling'),
+    )
+    SEX_MALE = 'M'
+    SEX_FEMALE = 'F'
+    SEXES = (
+        (SEX_FEMALE, 'Female'),
+        (SEX_MALE, 'Male')
     )
     client = models.ForeignKey(ClientInformation, related_name='family_members')
     type = models.CharField(max_length=1,
@@ -58,3 +66,14 @@ class FamilyMember(models.Model):
                             null=True)
     birth_date = models.DateField(null=True,
                             blank=True)
+    sex = models.CharField(max_length=1,
+                           choices=SEXES,
+                           default=SEX_FEMALE)
+
+
+
+META_DATA = (
+    'CLIENT_INFORMATION', ('TYPES', ClientInformation.TYPES),
+    'SERVICE', ('TYPES', Service.TYPES),
+    'FAMILY_MEMBER', ('TYPES', FamilyMember.TYPES),
+)

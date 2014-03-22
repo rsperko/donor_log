@@ -56,3 +56,12 @@ class Donation(models.Model):
                             choices=TYPES,
                             default=TYPE_HOUSEHOLD_ITEM)
     notes = models.TextField(blank=True)
+
+
+META_DATA = (
+    'DONOR_INFORMATION', (
+        'CATEGORIES', DonorInformation.CATEGORIES,
+        'TYPES', DonorInformation.TYPES,
+    ),
+    'DONATION', ('TYPES', Donation.TYPES),
+)
