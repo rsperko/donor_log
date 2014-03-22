@@ -38,6 +38,8 @@ INSTALLED_APPS = (
     'south',
     'rest_framework',
 
+    'entity',
+    'client',
     'donor',
 )
 
