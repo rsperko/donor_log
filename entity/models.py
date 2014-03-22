@@ -29,6 +29,7 @@ class Entity(models.Model):
                                               null=True,
                                               blank=True,
                                               related_name='client_information')
+    active = models.BooleanField(default=True)
 
     def name(self):
         if self.institution_name:
