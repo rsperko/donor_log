@@ -45,7 +45,7 @@ class Phone(models.Model):
         (TYPE_WORK, 'Work'),
         (TYPE_OTHER, 'Other')
     )
-    donor = models.ForeignKey(Donor)
+    donor = models.ForeignKey(Donor, related_name='phones')
     preferred = models.BooleanField()
     number = models.CharField(max_length=12)
     type = models.CharField(max_length=1,
@@ -53,7 +53,7 @@ class Phone(models.Model):
                             default=TYPE_MOBILE)
 
 class Address(models.Model):
-    donor = models.ForeignKey(Donor)
+    donor = models.ForeignKey(Donor, related_name='addresses')
     preferred = models.BooleanField()
     care_of = models.CharField(max_length=100)
     line1 = models.CharField(max_length=100)
@@ -77,7 +77,7 @@ class Donation(models.Model):
         (TYPE_MONEY, 'Money'),
         (TYPE_OTHER, 'Other - see notes')
     )
-    donor = models.ForeignKey(Donor)
+    donor = models.ForeignKey(Donor, related_name='donations')
     date = models.DateField(default=datetime.date.today)
     monetary_amount = models.DecimalField(decimal_places=2,
                                           max_digits=8)
