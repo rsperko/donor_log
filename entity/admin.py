@@ -25,10 +25,22 @@ class EntityAdmin(admin.ModelAdmin):
                     'email',
                     'is_donor',
                     'is_client',
-                    'added')
-    fieldsets = [
-
-    ]
+                    'added',)
+    fields = (
+        'first_name',
+        'last_name',
+        'institution_name',
+        'email',
+        'notes',
+        'active',
+        # 'donorinformation_link',
+        # 'clientinformation_link',
+    )
+    readonly_fields = (
+        'donorinformation_link',
+        'clientinformation_link',
+    )
+    fieldsets = []
     inlines = [
         PhoneInline,
         AddressInline,

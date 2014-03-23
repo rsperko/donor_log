@@ -1,3 +1,4 @@
+from django.core import urlresolvers
 from django.db import models
 import datetime
 from donor.models import DonorInformation
@@ -47,6 +48,23 @@ class Entity(models.Model):
 
     def is_client(self):
         return self.client_information is not None
+
+    def donorinformation_link(self):
+        if self.donor_information and self.donor_information.id:
+            changeform_url = urlresolvers.reverse('admin:donor_donorinformation_change', args=(self.donor_information.id,))
+            return u'<a href="%s" target="_blank">Details</a>' % changeform_url
+        return u''
+    donorinformation_link.allow_tags = True
+    donorinformation_link.short_description = 'Donor Information'
+
+    def clientinformation_link(self):
+        if self.client_information and self.client_information.id:
+            changeform_url = urlresolvers.reverse('admin:client_clientinformation_change', args=(self.client_information.id,))
+            return u'<a href="%s" target="_blank">Details</a>' % changeform_url
+        return u''
+    clientinformation_link.allow_tags = True
+    clientinformation_link.short_description = 'Client Information'
+
 
 
 class Phone(models.Model):

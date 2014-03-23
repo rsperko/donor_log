@@ -30,6 +30,7 @@ class DonorInformation(models.Model):
                             choices=tuple(sorted(TYPES.items())),
                             default=TYPE_DONOR)
 
+
 class Donation(models.Model):
     TYPE_FURNITURE = 'F'
     TYPE_CLOTHING = 'C'
