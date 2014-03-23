@@ -7,27 +7,27 @@ import datetime
 class DonorInformation(models.Model):
     TYPE_DONOR = 'D'
     TYPE_PARTNER = 'P'
-    TYPES = (
-        (TYPE_DONOR, 'Donor'),
-        (TYPE_PARTNER, 'Partner')
-    )
+    TYPES = {
+        TYPE_DONOR: 'Donor',
+        TYPE_PARTNER: 'Partner',
+    }
     CATEGORY_INDIVIDUAL = 'I'
     CATEGORY_BUSINESS = 'B'
     CATEGORY_NON_PROFIT = 'N'
     CATEGORY_FOUNDATION = 'F'
     CATEGORY_OTHER = 'O'
-    CATEGORIES = (
-        (CATEGORY_BUSINESS, 'Business'),
-        (CATEGORY_FOUNDATION, 'Foundation'),
-        (CATEGORY_INDIVIDUAL, 'Individual'),
-        (CATEGORY_NON_PROFIT, 'Non-Profit'),
-        (CATEGORY_OTHER, 'Other - see notes')
-    )
+    CATEGORIES = {
+        CATEGORY_BUSINESS: 'Business',
+        CATEGORY_FOUNDATION: 'Foundation',
+        CATEGORY_INDIVIDUAL: 'Individual',
+        CATEGORY_NON_PROFIT: 'Non-Profit',
+        CATEGORY_OTHER: 'Other - see notes',
+    }
     category = models.CharField(max_length=1,
-                                choices=CATEGORIES,
+                                choices=tuple(sorted(CATEGORIES.items())),
                                 default=CATEGORY_INDIVIDUAL)
     type = models.CharField(max_length=1,
-                            choices=TYPES,
+                            choices=tuple(sorted(TYPES.items())),
                             default=TYPE_DONOR)
 
 class Donation(models.Model):
@@ -38,30 +38,30 @@ class Donation(models.Model):
     TYPE_MONEY = 'M'
     TYPE_OTHER = 'O'
     TYPE_IN_KIND = 'I'
-    TYPES = (
-        (TYPE_CLOTHING, 'Clothing'),
-        (TYPE_FOOD, 'Food'),
-        (TYPE_FURNITURE, 'Furniture'),
-        (TYPE_HOUSEHOLD_ITEM, 'Household Items'),
-        (TYPE_MONEY, 'Money'),
-        (TYPE_IN_KIND, 'In-Kind'),
-        (TYPE_OTHER, 'Other - see notes')
-    )
+    TYPES = {
+        TYPE_CLOTHING: 'Clothing',
+        TYPE_FOOD: 'Food',
+        TYPE_FURNITURE: 'Furniture',
+        TYPE_HOUSEHOLD_ITEM: 'Household Items',
+        TYPE_MONEY: 'Money',
+        TYPE_IN_KIND: 'In-Kind',
+        TYPE_OTHER: 'Other - see notes',
+    }
     donor = models.ForeignKey(DonorInformation, related_name='donations')
     date = models.DateField(default=datetime.date.today)
     monetary_amount = models.DecimalField(decimal_places=2,
                                           max_digits=8,
                                           blank=True)
     type = models.CharField(max_length=1,
-                            choices=TYPES,
+                            choices=tuple(sorted(TYPES.items())),
                             default=TYPE_HOUSEHOLD_ITEM)
     notes = models.TextField(blank=True)
 
 
-META_DATA = (
-    'DONOR_INFORMATION', (
-        'CATEGORIES', DonorInformation.CATEGORIES,
-        'TYPES', DonorInformation.TYPES,
-    ),
-    'DONATION', ('TYPES', Donation.TYPES),
-)
+META_DATA = {
+    'DONOR_INFORMATION': {
+        'CATEGORIES': DonorInformation.CATEGORIES,
+        'TYPES': DonorInformation.TYPES,
+    },
+    'DONATION': {'TYPES': Donation.TYPES},
+}

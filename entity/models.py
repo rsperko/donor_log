@@ -54,17 +54,17 @@ class Phone(models.Model):
     TYPE_MOBILE = 'M'
     TYPE_WORK = 'W'
     TYPE_OTHER = 'O'
-    TYPES = (
-        (TYPE_HOME, 'Home'),
-        (TYPE_MOBILE, 'Mobile'),
-        (TYPE_WORK, 'Work'),
-        (TYPE_OTHER, 'Other')
-    )
+    TYPES = {
+        TYPE_HOME: 'Home',
+        TYPE_MOBILE: 'Mobile',
+        TYPE_WORK: 'Work',
+        TYPE_OTHER: 'Other',
+    }
     entity = models.ForeignKey(Entity, related_name='phones')
     primary = models.BooleanField()
     number = models.CharField(max_length=12)
     type = models.CharField(max_length=1,
-                            choices=TYPES,
+                            choices=tuple(sorted(TYPES.items())),
                             default=TYPE_MOBILE)
 
 class Address(models.Model):
@@ -87,21 +87,21 @@ class Contact(models.Model):
     TYPE_EMAIL = 'E'
     TYPE_IN_PERSON = 'I'
     TYPE_OTHER = 'O'
-    TYPES = (
-        (TYPE_EMAIL, 'E-mail'),
-        (TYPE_IN_PERSON, 'In-Person'),
-        (TYPE_PHONE, 'Phone'),
-        (TYPE_OTHER, 'Other - see notes')
-    )
+    TYPES = {
+        TYPE_EMAIL: 'E-mail',
+        TYPE_IN_PERSON: 'In-Person',
+        TYPE_PHONE: 'Phone',
+        TYPE_OTHER: 'Other - see notes',
+    }
     entity = models.ForeignKey(Entity)
     date_time = models.DateTimeField(default=datetime.datetime.now())
     type = models.CharField(max_length=1,
-                            choices=TYPES,
+                            choices=tuple(sorted(TYPES.items())),
                             default=TYPE_PHONE)
     notes = models.TextField()
 
 
-META_DATA = (
-    'PHONE', ('TYPES', Phone.TYPES),
-    'CONTACT', ('TYPES', Contact.TYPES),
-)
+META_DATA = {
+    'PHONE': {'TYPES': Phone.TYPES},
+    'CONTACT': {'TYPES': Contact.TYPES},
+}
