@@ -3,6 +3,7 @@ from django.db import models
 import datetime
 
 # Create your models here.
+from entity.models import Entity
 
 
 class AvailableHours(models.Model):
@@ -47,6 +48,8 @@ class VolunteerInformation(models.Model):
                                         null=True,
                                         blank=True,
                                         related_name='availability')
+    entity = models.ForeignKey(Entity,
+                               related_name='volunteer_information')
 
     def __str__(self):
         return "active: " + str(self.active)

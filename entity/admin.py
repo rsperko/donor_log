@@ -3,6 +3,8 @@ from django.contrib import admin
 from entity.models import *
 
 from donor.models import DonorInformation
+from client.models import ClientInformation
+from volunteer.models import VolunteerInformation
 
 # Register your models here.
 
@@ -27,11 +29,22 @@ class DonorInformationInline(admin.StackedInline):
     extra = 0
 
 
+class ClientInformationInline(admin.StackedInline):
+    model = ClientInformation
+    extra = 0
+
+
+class VolunteerInformationInline(admin.StackedInline):
+    model = VolunteerInformation
+    extra = 0
+
+
 class EntityAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'email',
                     'is_donor',
                     'is_client',
+                    'is_volunteer',
                     'added',)
     fields = (
         'first_name',
@@ -41,15 +54,19 @@ class EntityAdmin(admin.ModelAdmin):
         'notes',
         'active',
         'donorinformation_link',
-        # 'clientinformation_link',
+        'clientinformation_link',
+        'volunteerinformation_link',
     )
     readonly_fields = (
         'donorinformation_link',
-        # 'clientinformation_link',
+        'clientinformation_link',
+        'volunteerinformation_link',
     )
     fieldsets = []
     inlines = [
         DonorInformationInline,
+        ClientInformationInline,
+        VolunteerInformationInline,
         PhoneInline,
         AddressInline,
         ContactInline,

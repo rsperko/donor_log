@@ -1,8 +1,6 @@
 from django.core import urlresolvers
 from django.db import models
 import datetime
-from client.models import ClientInformation
-from volunteer.models import VolunteerInformation
 
 # Create your models here.
 
@@ -22,14 +20,6 @@ class Entity(models.Model):
                               null=True)
     notes = models.TextField(blank=True,
                              null=True)
-    client_information = models.OneToOneField(ClientInformation,
-                                              null=True,
-                                              blank=True,
-                                              related_name='client_information')
-    volunteer_information = models.OneToOneField(VolunteerInformation,
-                                              null=True,
-                                              blank=True,
-                                              related_name='volunteer_information')
     active = models.BooleanField(default=True)
 
     def name(self):
@@ -42,7 +32,10 @@ class Entity(models.Model):
         return self.donor_information.count() > 0
 
     def is_client(self):
-        return self.client_information is not None
+        return self.client_information.count() > 0
+
+    def is_volunteer(self):
+        return self.volunteer_information.count() > 0
 
     def donorinformation_link(self):
         if self.is_donor():
@@ -51,6 +44,22 @@ class Entity(models.Model):
         return u''
     donorinformation_link.allow_tags = True
     donorinformation_link.short_description = 'Donor Information'
+
+    def clientinformation_link(self):
+        if self.is_client():
+            changeform_url = urlresolvers.reverse('admin:clientinformation_change', args=(self.client_information.first().id,))
+            return u'<a href="%s" target="_blank">Details</a>' % changeform_url
+        return u''
+    clientinformation_link.allow_tags = True
+    clientinformation_link.short_description = 'Client Information'
+
+    def volunteerinformation_link(self):
+        if self.is_volunteer():
+            changeform_url = urlresolvers.reverse('admin:volunteerinformation_change', args=(self.volunteer_information.first().id,))
+            return u'<a href="%s" target="_blank">Details</a>' % changeform_url
+        return u''
+    volunteerinformation_link.allow_tags = True
+    volunteerinformation_link.short_description = 'Volunteer Information'
 
 
 

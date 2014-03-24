@@ -5,6 +5,7 @@ import datetime
 # Create your models here.
 
 # Create your models here.
+from entity.models import Entity
 
 
 class ClientInformation(models.Model):
@@ -14,6 +15,8 @@ class ClientInformation(models.Model):
         TYPE_INDIVIDUAL: 'Individual',
         TYPE_FAMILY: 'Family',
     }
+    entity = models.ForeignKey(Entity,
+                               related_name='client_information')
     type = models.CharField(max_length=1,
                             choices=tuple(sorted(TYPES.items())),
                             default=TYPE_INDIVIDUAL)
