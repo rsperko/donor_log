@@ -2,6 +2,8 @@ from django.contrib import admin
 
 from entity.models import *
 
+from donor.models import DonorInformation
+
 # Register your models here.
 
 
@@ -20,6 +22,11 @@ class ContactInline(admin.TabularInline):
     extra = 0
 
 
+class DonorInformationInline(admin.StackedInline):
+    model = DonorInformation
+    extra = 0
+
+
 class EntityAdmin(admin.ModelAdmin):
     list_display = ('name',
                     'email',
@@ -33,15 +40,16 @@ class EntityAdmin(admin.ModelAdmin):
         'email',
         'notes',
         'active',
-        # 'donorinformation_link',
+        'donorinformation_link',
         # 'clientinformation_link',
     )
     readonly_fields = (
         'donorinformation_link',
-        'clientinformation_link',
+        # 'clientinformation_link',
     )
     fieldsets = []
     inlines = [
+        DonorInformationInline,
         PhoneInline,
         AddressInline,
         ContactInline,

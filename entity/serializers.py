@@ -48,7 +48,7 @@ class EntitySerializer(serializers.ModelSerializer):
     phones = PhoneSerializer(many=True)
     addresses = AddressSerializer(many=True)
     contacts = ContactSerializer(many=True)
-    donor_information = DonorInformationSerializer()
+    # donor_information = DonorInformationSerializer()
     client_information = ClientInformationSerializer()
     volunteer_information = VolunteerInformationSerializer()
 
@@ -64,6 +64,6 @@ class EntitySerializer(serializers.ModelSerializer):
             'notes',
             'phones',
             'addresses',
-            'donor_information',
+            # 'donor_information',
             'client_information',
         )

@@ -1,8 +1,9 @@
 from django.db import models
 import datetime
 
-# Create your models here.
 
+# Create your models here.
+from entity.models import Entity
 
 class DonorInformation(models.Model):
     TYPE_DONOR = 'D'
@@ -16,16 +17,20 @@ class DonorInformation(models.Model):
     CATEGORY_NON_PROFIT = 'N'
     CATEGORY_FOUNDATION = 'F'
     CATEGORY_OTHER = 'O'
+    CATEGORY_UNSET = 'U'
     CATEGORIES = {
         CATEGORY_BUSINESS: 'Business',
         CATEGORY_FOUNDATION: 'Foundation',
         CATEGORY_INDIVIDUAL: 'Individual',
         CATEGORY_NON_PROFIT: 'Non-Profit',
         CATEGORY_OTHER: 'Other - see notes',
+        CATEGORY_UNSET: 'Unset',
     }
+    entity = models.ForeignKey(Entity,
+                               related_name='donor_information')
     category = models.CharField(max_length=1,
                                 choices=tuple(sorted(CATEGORIES.items())),
-                                default=CATEGORY_INDIVIDUAL)
+                                default=CATEGORY_UNSET)
     type = models.CharField(max_length=1,
                             choices=tuple(sorted(TYPES.items())),
                             default=TYPE_DONOR)

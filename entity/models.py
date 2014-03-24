@@ -1,7 +1,6 @@
 from django.core import urlresolvers
 from django.db import models
 import datetime
-from donor.models import DonorInformation
 from client.models import ClientInformation
 from volunteer.models import VolunteerInformation
 
@@ -23,10 +22,6 @@ class Entity(models.Model):
                               null=True)
     notes = models.TextField(blank=True,
                              null=True)
-    donor_information = models.OneToOneField(DonorInformation,
-                                             null=True,
-                                             blank=True,
-                                             related_name='donor_information')
     client_information = models.OneToOneField(ClientInformation,
                                               null=True,
                                               blank=True,
@@ -44,26 +39,18 @@ class Entity(models.Model):
             return self.last_name + ', ' + self.first_name
 
     def is_donor(self):
-        return self.donor_information is not None
+        return self.donor_information.count() > 0
 
     def is_client(self):
         return self.client_information is not None
 
     def donorinformation_link(self):
-        if self.donor_information and self.donor_information.id:
-            changeform_url = urlresolvers.reverse('admin:donor_donorinformation_change', args=(self.donor_information.id,))
+        if self.is_donor():
+            changeform_url = urlresolvers.reverse('admin:donor_donorinformation_change', args=(self.donor_information.first().id,))
             return u'<a href="%s" target="_blank">Details</a>' % changeform_url
         return u''
     donorinformation_link.allow_tags = True
     donorinformation_link.short_description = 'Donor Information'
-
-    def clientinformation_link(self):
-        if self.client_information and self.client_information.id:
-            changeform_url = urlresolvers.reverse('admin:client_clientinformation_change', args=(self.client_information.id,))
-            return u'<a href="%s" target="_blank">Details</a>' % changeform_url
-        return u''
-    clientinformation_link.allow_tags = True
-    clientinformation_link.short_description = 'Client Information'
 
 
 
