@@ -98,8 +98,8 @@ STATICFILES_DIRS = (
 IN_PROD = False
 
 
-# TODO set up heroku environment variable
-if socket.gethostname() == 'poseiden.local':
+# TODO total hack, need a better way.
+if socket.gethostname().startswith('poseiden'):
     from settings_dev import *
 else:
     from settings_prod import *

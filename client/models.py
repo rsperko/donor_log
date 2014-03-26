@@ -11,15 +11,17 @@ from entity.models import Entity
 class ClientInformation(models.Model):
     TYPE_INDIVIDUAL = 'I'
     TYPE_FAMILY = 'F'
+    TYPE_UNSET = 'U'
     TYPES = {
         TYPE_INDIVIDUAL: 'Individual',
         TYPE_FAMILY: 'Family',
+        TYPE_UNSET: 'Unset'
     }
     entity = models.ForeignKey(Entity,
                                related_name='client_information')
     type = models.CharField(max_length=1,
                             choices=tuple(sorted(TYPES.items())),
-                            default=TYPE_INDIVIDUAL)
+                            default=TYPE_UNSET)
 
     def __str__(self):
         return self.TYPES[self.type]

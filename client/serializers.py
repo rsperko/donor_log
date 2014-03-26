@@ -15,7 +15,7 @@ class ServiceSerializer(serializers.ModelSerializer):
         )
 
 
-class FamilyMemeberSerializer(serializers.ModelSerializer):
+class FamilyMemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = FamilyMember
         fields = (
@@ -27,7 +27,7 @@ class FamilyMemeberSerializer(serializers.ModelSerializer):
 
 class ClientInformationSerializer(serializers.ModelSerializer):
     services = ServiceSerializer(many=True)
-    family_members = FamilyMemeberSerializer(many=True)
+    family_members = FamilyMemberSerializer(many=True)
 
     class Meta:
         model = ClientInformation
@@ -35,4 +35,5 @@ class ClientInformationSerializer(serializers.ModelSerializer):
             'id',
             'type',
             'family_members',
+            'services',
         )

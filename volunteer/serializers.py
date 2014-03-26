@@ -46,4 +46,6 @@ class VolunteerInformationSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'active',
+            'skills',
+            'availability',
         )

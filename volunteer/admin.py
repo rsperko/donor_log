@@ -12,16 +12,27 @@ class AvailableHoursAdmin(admin.ModelAdmin):
     list_display = ('start_time', 'end_time',)
 
 
+class AvailableHoursInline(admin.TabularInline):
+    model = AvailableHours
+
+
+class AvailabilityInline(admin.TabularInline):
+    model = Availability
+
+
 class AvailabilityAdmin(admin.ModelAdmin):
     list_display = ()
     fieldsets = []
-    inlines = []
+    inlines = [
+        AvailableHoursInline,
+    ]
 
 
 class VolunteerInformationAdmin(admin.ModelAdmin):
     list_display = ('active',)
     fieldsets = []
     inlines = [
+        AvailabilityInline,
         SkillInline,
         ]
 

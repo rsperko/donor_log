@@ -11,7 +11,18 @@ class AvailableHours(models.Model):
     end_time = models.TimeField()
 
 
+class VolunteerInformation(models.Model):
+    active = models.BooleanField(default=False)
+    entity = models.ForeignKey(Entity,
+                               related_name='volunteer_information')
+
+    def __str__(self):
+        return "active: " + str(self.active)
+
+
 class Availability(models.Model):
+    volunteer_information = models.ForeignKey(VolunteerInformation,
+                               related_name='availability')
     sunday = models.OneToOneField(AvailableHours,
                                   null=True,
                                   blank=True,
@@ -40,19 +51,8 @@ class Availability(models.Model):
                                     null=True,
                                     blank=True,
                                     related_name='saturday')
-
-
-class VolunteerInformation(models.Model):
-    active = models.BooleanField(default=True)
-    availability = models.OneToOneField(Availability,
-                                        null=True,
-                                        blank=True,
-                                        related_name='availability')
-    entity = models.ForeignKey(Entity,
-                               related_name='volunteer_information')
-
-    def __str__(self):
-        return "active: " + str(self.active)
+    volunteer = models.ForeignKey(Entity,
+                               related_name='availability')
 
 
 class Skill(models.Model):

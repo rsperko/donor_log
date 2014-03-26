@@ -47,7 +47,7 @@ class Entity(models.Model):
 
     def clientinformation_link(self):
         if self.is_client():
-            changeform_url = urlresolvers.reverse('admin:clientinformation_change', args=(self.client_information.first().id,))
+            changeform_url = urlresolvers.reverse('admin:client_clientinformation_change', args=(self.client_information.first().id,))
             return u'<a href="%s" target="_blank">Details</a>' % changeform_url
         return u''
     clientinformation_link.allow_tags = True
@@ -55,7 +55,7 @@ class Entity(models.Model):
 
     def volunteerinformation_link(self):
         if self.is_volunteer():
-            changeform_url = urlresolvers.reverse('admin:volunteerinformation_change', args=(self.volunteer_information.first().id,))
+            changeform_url = urlresolvers.reverse('admin:volunteer_volunteerinformation_change', args=(self.volunteer_information.first().id,))
             return u'<a href="%s" target="_blank">Details</a>' % changeform_url
         return u''
     volunteerinformation_link.allow_tags = True
