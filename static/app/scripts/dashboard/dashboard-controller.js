@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('staticApp')
-  .controller('MainCtrl', function ($scope, $http) {
+    .controller('DashboardCtrl', function ($scope, $http) {
         $scope.metadata = {};
         $scope.entities = [];
 
@@ -10,4 +10,4 @@ angular.module('staticApp')
                 $scope.entities.push(entity);
             })
         });
-  });
+    });
