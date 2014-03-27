@@ -1,10 +1,13 @@
 'use strict';
 
 angular.module('staticApp')
-  .controller('MainCtrl', function ($scope) {
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
+  .controller('MainCtrl', function ($scope, $http) {
+        $scope.metadata = {};
+        $scope.entities = [];
+
+        $http.get('/entity/').then(function(result) {
+            angular.forEach(result.data, function(entity) {
+                $scope.entities.push(entity);
+            })
+        });
   });
