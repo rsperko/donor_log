@@ -126,8 +126,8 @@ class VolunteerInformationSerializer(serializers.ModelSerializer):
 
 
 class EntitySerializer(serializers.ModelSerializer):
-    phones = PhoneSerializer(many=True)
-    addresses = AddressSerializer(many=True)
+    phones = PhoneSerializer(many=True, allow_add_remove=True)
+    addresses = AddressSerializer(many=True, allow_add_remove=True)
     contacts = CommunicationSerializer(many=True)
     # donor_information = DonorInformationSerializer()
     # client_information = ClientInformationSerializer()
