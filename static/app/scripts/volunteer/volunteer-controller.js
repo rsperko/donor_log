@@ -58,6 +58,9 @@ angular.module('trackingApp')
 
             init = function() {
                 $scope.model = model(id);
+
+                setupActions();
+
                 if(id) {
                     $scope.model.load().then(function () {
                         fillFromModel();
@@ -66,8 +69,6 @@ angular.module('trackingApp')
                 else {
                     fillFromModel();
                 }
-
-                setupActions();
             };
 
         init();

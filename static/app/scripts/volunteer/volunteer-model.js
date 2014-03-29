@@ -90,7 +90,7 @@ angular.module('trackingApp')
                     type: '',
                     notes: '',
                     connected: true,
-                    entity_id: self.id
+                    entity: self.id
                 };
             return communication;
         };
@@ -116,7 +116,7 @@ angular.module('trackingApp')
                 _.extend(self, result);
                 defer.resolve(self);
             };
-            resource.deleteCommunication(communication, success);
+            resource.deleteCommunication({id: self.id, comm_id: communication.id}, success);
 
             return defer.promise;
         };

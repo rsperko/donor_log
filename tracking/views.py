@@ -8,7 +8,7 @@ from rest_framework import status
 from .models import Entity, \
     ClientInformation, \
     DonorInformation, \
-    VolunteerInformation
+    VolunteerInformation, Communication
 from .serializers import EntitySerializer, \
     ClientInformationSerializer, \
     DonorInformationSerializer, \
@@ -32,14 +32,16 @@ class EntityViewSet(viewsets.ModelViewSet):
             return Response(comm_serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
 
-    def __delete_communication(self, comm_serializer):
-        if comm_serializer.is_valid():
-            comm_serializer.save()
+    def __delete_communication(self, request):
+        comm_id = request.QUERY_PARAMS['comm_id']
+        if comm_id:
+            comm = Communication.objects.filter(id=comm_id)
+            comm.delete()
             entity = self.get_object()
             entity_serializer = EntitySerializer(entity)
             return Response(entity_serializer.data)
         else:
-            return Response(comm_serializer.errors,
+            return Response({},
                             status=status.HTTP_400_BAD_REQUEST)
 
     def __update_communication(self, comm_serializer):
@@ -58,7 +60,7 @@ class EntityViewSet(viewsets.ModelViewSet):
         if request.method == 'POST':
             return self.__add_communication(comm_serializer)
         elif request.method == 'DELETE':
-            return self.__delete_communication(comm_serializer)
+            return self.__delete_communication(request)
         else:
             return self.__update_communication(comm_serializer)
 

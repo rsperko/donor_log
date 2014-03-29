@@ -35,13 +35,14 @@ class AddressSerializer(serializers.ModelSerializer):
 class CommunicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Communication
-        fields = (
-            'id',
-            'date_time',
-            'type',
-            'notes',
-            'connected',
-        )
+        # fields = (
+        #     'id',
+        #     'date_time',
+        #     'type',
+        #     'notes',
+        #     'connected',
+        #     # 'entity_id',
+        # )
 
 
 class ServiceSerializer(serializers.ModelSerializer):

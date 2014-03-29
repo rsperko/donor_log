@@ -2,10 +2,10 @@
 
 angular.module('trackingApp')
     .factory('volunteerResource', ["resourceFactory", function(resourceFactory) {
-        var service = resourceFactory("/api/entities/:id/:entity_id/:action/",
+        var service = resourceFactory("/api/entities/:entity/:id/:action",
             {
                 id:"@id",
-                entity_id:"@entity_id"
+                entity:"@entity"
             }, {
                 'addCommunication': {method: 'POST', params: { action: 'communications' }},
                 'deleteCommunication': {method: 'DELETE', params: { action: 'communications' }}
