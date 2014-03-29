@@ -1,13 +1,11 @@
 'use strict';
 
-angular.module('staticApp')
-    .controller('DashboardCtrl', function ($scope, $http) {
+angular.module('trackingApp')
+    .controller('dashboardCtrl', ["$scope", "volunteerService", function ($scope, volunteerService) {
         $scope.metadata = {};
         $scope.entities = [];
 
-        $http.get('/entity/').then(function(result) {
-            angular.forEach(result.data, function(entity) {
-                $scope.entities.push(entity);
-            })
+        volunteerService().then(function(volunteers) {
+            $scope.entities = volunteers;
         });
-    });
+    }]);

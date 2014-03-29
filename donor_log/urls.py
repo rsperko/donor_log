@@ -26,8 +26,8 @@ urlpatterns = patterns('',
 
     url(r'^entities/', include('tracking.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^meta_data/(?P<resource_id>\d+)[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),
-    url(r'^meta_data[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),
+    url(r'^api/meta_data/(?P<resource_id>\d+)[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),
+    url(r'^api/meta_data[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),
     url(r'^api/', include(router.urls)),
     url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
 )

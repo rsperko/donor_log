@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('staticApp', [
+angular.module('trackingApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
@@ -10,7 +10,11 @@ angular.module('staticApp', [
     $routeProvider
       .when('/', {
         templateUrl: 'views/dashboard/main.html',
-        controller: 'DashboardCtrl'
+        controller: 'dashboardCtrl'
+      })
+      .when('/volunteer/:entityId', {
+        templateUrl: 'views/volunteer/main.html',
+        controller: 'volunteerCtrl'
       })
       .otherwise({
         redirectTo: '/'
