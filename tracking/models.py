@@ -101,7 +101,7 @@ class Communication(models.Model):
         TYPE_OTHER: 'Other - see notes',
     }
     entity = models.ForeignKey(Entity, related_name='communications')
-    date_time = models.DateTimeField(default=datetime.datetime.now())
+    date = models.DateField(default=datetime.date.today)
     type = models.CharField(max_length=1,
                             choices=tuple(sorted(TYPES.items())),
                             default=TYPE_PHONE)

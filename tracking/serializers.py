@@ -37,7 +37,7 @@ class CommunicationSerializer(serializers.ModelSerializer):
         model = Communication
         # fields = (
         #     'id',
-        #     'date_time',
+        #     'date',
         #     'type',
         #     'notes',
         #     'connected',

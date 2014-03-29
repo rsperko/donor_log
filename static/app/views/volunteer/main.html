@@ -61,8 +61,8 @@
            ng-model="newCommunication.connected">
     <label for="connected">Connected</label>
     <input type="text"
-           placeholder="YYYY-MM-DDThh:mm"
-           ng-model="newCommunication.date_time">
+           placeholder="YYYY-MM-DD"
+           ng-model="newCommunication.date">
     <input type="text"
            placeholder="P,E,I,O"
            ng-model="newCommunication.type">
@@ -72,7 +72,7 @@
     <button ng-click="cancelNewCommunication()">Cancel</button>
 </div>
 <div ng-repeat="communication in model.communications">
-    <span>{{ communication.date_time }}</span>
+    <span>{{ communication.date }}</span>
     <span>{{ communication.type }}</span>
     <button ng-click="deleteCommunication($index)">-</button>
 </div>

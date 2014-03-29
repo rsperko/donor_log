@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trackingApp')
-    .factory('volunteerModel', ["volunteerResource", "$q", function(resource, $q) {
+    .factory('volunteerModel', ["$q", "$filter", "volunteerResource", function($q, $filter, resource) {
 
         var Model = function(id, data) {
             var self = this;
@@ -86,7 +86,7 @@ angular.module('trackingApp')
         Model.prototype.createCommunication = function() {
             var self = this,
                 communication = {
-                    date_time: '',
+                    date: $filter('date')(new Date(), 'yyyy-MM-dd'),
                     type: '',
                     notes: '',
                     connected: true,

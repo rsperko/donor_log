@@ -11,7 +11,7 @@ angular.module('trackingApp')
                 if(! $scope.model.addresses.length) {
                     $scope.model.newAddress();
                 }
-                if(! $scope.model.communications.length) {
+                if(id && ! $scope.model.communications.length) {
                     $scope.createCommunication();
                 }
             },
