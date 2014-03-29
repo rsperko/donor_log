@@ -9,40 +9,16 @@ from .models import Entity, Phone, Address, Communication, \
 class PhoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Phone
-        fields = (
-            'id',
-            'primary',
-            'number',
-            'type',
-        )
 
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
-        fields = (
-            'id',
-            'primary',
-            'care_of',
-            'line1',
-            'line2',
-            'city',
-            'state',
-            'postalCode',
-        )
 
 
 class CommunicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Communication
-        # fields = (
-        #     'id',
-        #     'date',
-        #     'type',
-        #     'notes',
-        #     'connected',
-        #     # 'entity_id',
-        # )
 
 
 class ServiceSerializer(serializers.ModelSerializer):
@@ -123,6 +99,8 @@ class VolunteerInformationSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'active',
+            'emergency_contact_name',
+            'emergency_contact_number',
             'skills',
         )
 
@@ -133,7 +111,7 @@ class EntitySerializer(serializers.ModelSerializer):
     communications = CommunicationSerializer(many=True, allow_add_remove=True)
     # donor_information = DonorInformationSerializer()
     # client_information = ClientInformationSerializer()
-    # volunteer_information = VolunteerInformationSerializer()
+    volunteer_information = VolunteerInformationSerializer(many=True, allow_add_remove=True)
 
     class Meta:
         model = Entity
@@ -150,5 +128,5 @@ class EntitySerializer(serializers.ModelSerializer):
             'communications',
             # 'donor_information',
             # 'client_information',
-            # 'volunteer_information',
+            'volunteer_information',
         )

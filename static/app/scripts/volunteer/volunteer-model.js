@@ -12,14 +12,10 @@ angular.module('trackingApp')
             self.id = id;
             if(! data) {
                 data = {
-                    addresses: [],
-                    email: '',
-                    first_name: '',
-                    institution_name: '',
-                    last_name: '',
-                    notes: '',
-                    phones: [],
-                    communications: []
+                    active: true,
+                    emergency_contact_name: '',
+                    emergency_contact_number: '',
+                    skills: []
                 };
             }
             _.extend(self, data);
@@ -57,69 +53,12 @@ angular.module('trackingApp')
             return defer.promise;
         };
 
-        Model.prototype.newPhone = function() {
-            var self = this,
-                phone = {
-                primary: ! self.phones.length,
-                number: '',
-                type: ''
-            };
-            self.phones.push(phone);
-            return phone;
+        Model.prototype.ensureSkills = function() {
+            if(! this.skills) {
+                this.skills = [];
+            }
         };
 
-        Model.prototype.newAddress = function() {
-            var self = this,
-                address = {
-                    primary: ! self.addresses.length,
-                    care_of: '',
-                    line1: '',
-                    line2: '',
-                    city: '',
-                    state: '',
-                    postalCode: ''
-                };
-            self.addresses.push(address);
-            return address;
-        };
-
-        Model.prototype.createCommunication = function() {
-            var self = this,
-                communication = {
-                    date: $filter('date')(new Date(), 'yyyy-MM-dd'),
-                    type: '',
-                    notes: '',
-                    connected: true,
-                    entity: self.id
-                };
-            return communication;
-        };
-
-        Model.prototype.addCommunication = function(communication) {
-            var self = this,
-                defer = $q.defer();
-
-            var success = function (result) {
-                _.extend(self, result);
-                defer.resolve(self);
-            };
-            resource.addCommunication(communication, success);
-
-            return defer.promise;
-        };
-
-        Model.prototype.deleteCommunication = function(communication) {
-            var self = this,
-                defer = $q.defer();
-
-            var success = function (result) {
-                _.extend(self, result);
-                defer.resolve(self);
-            };
-            resource.deleteCommunication({id: self.id, comm_id: communication.id}, success);
-
-            return defer.promise;
-        };
 
         return Model;
     }]);

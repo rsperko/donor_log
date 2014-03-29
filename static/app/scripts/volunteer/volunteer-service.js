@@ -2,13 +2,10 @@
 
 angular.module('trackingApp')
     .factory('volunteerResource', ["resourceFactory", function(resourceFactory) {
-        var service = resourceFactory("/api/entities/:entity/:id/:action",
+        var service = resourceFactory("/api/volunteers/:id/:action",
             {
-                id:"@id",
-                entity:"@entity"
+                id:"@id"
             }, {
-                'addCommunication': {method: 'POST', params: { action: 'communications' }},
-                'deleteCommunication': {method: 'DELETE', params: { action: 'communications' }}
             });
         return service;
     }])
@@ -16,7 +13,7 @@ angular.module('trackingApp')
         var load = function() {
             var defer = $q.defer();
 
-            $http.get('/api/entities/').then(function(result) {
+            $http.get('/api/volunteers/').then(function(result) {
                 var ret = [];
 
                 _.each(result.data, function(data) {

@@ -49,6 +49,15 @@
 <br>
 <textarea ng-model="model.notes" placeholder="Notes"></textarea>
 <br>
+    <h3>Skills</h3>
+    <h3>Emergency Contact</h3>
+    <input type="text"
+           placeholder="Name"
+           ng-model="model.volunteer_information[0].emergency_contact_name"/>
+    <input type="text"
+           placeholder="Number"
+           ng-model="model.volunteer_information[0].emergency_contact_number"/>
+    <br>
 <button type="submit" ng-click="save()">Save</button>
 </div>
 
