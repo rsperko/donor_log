@@ -65,8 +65,8 @@ class FamilyMemberSerializer(serializers.ModelSerializer):
 
 
 class ClientInformationSerializer(serializers.ModelSerializer):
-    services = ServiceSerializer(many=True)
-    family_members = FamilyMemberSerializer(many=True)
+    services = ServiceSerializer(many=True, allow_add_remove=True)
+    family_members = FamilyMemberSerializer(many=True, allow_add_remove=True)
 
     class Meta:
         model = ClientInformation
@@ -91,7 +91,7 @@ class DonationSerializer(serializers.ModelSerializer):
 
 
 class DonorInformationSerializer(serializers.ModelSerializer):
-    donations = DonationSerializer(many=True)
+    donations = DonationSerializer(many=True, allow_add_remove=True)
 
     class Meta:
         model = DonorInformation
@@ -114,7 +114,7 @@ class SkillSerializer(serializers.ModelSerializer):
 
 
 class VolunteerInformationSerializer(serializers.ModelSerializer):
-    skills = SkillSerializer(many=True)
+    skills = SkillSerializer(many=True, allow_add_remove=True)
 
     class Meta:
         model = VolunteerInformation
@@ -128,7 +128,7 @@ class VolunteerInformationSerializer(serializers.ModelSerializer):
 class EntitySerializer(serializers.ModelSerializer):
     phones = PhoneSerializer(many=True, allow_add_remove=True)
     addresses = AddressSerializer(many=True, allow_add_remove=True)
-    contacts = CommunicationSerializer(many=True)
+    contacts = CommunicationSerializer(many=True, allow_add_remove=True)
     # donor_information = DonorInformationSerializer()
     # client_information = ClientInformationSerializer()
     # volunteer_information = VolunteerInformationSerializer()
