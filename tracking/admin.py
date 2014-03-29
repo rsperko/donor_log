@@ -1,14 +1,12 @@
 from django.contrib import admin
 
-from entity.models import *
+from .models import Phone, Address, Communication, Entity, \
+    ClientInformation, Service, FamilyMember, \
+    DonorInformation, Donation, \
+    VolunteerInformation, Skill
 
-from donor.models import DonorInformation
-from client.models import ClientInformation
-from volunteer.models import VolunteerInformation
 
 # Register your models here.
-
-
 class PhoneInline(admin.TabularInline):
     model = Phone
     extra = 0
@@ -19,8 +17,8 @@ class AddressInline(admin.TabularInline):
     extra = 0
 
 
-class ContactInline(admin.TabularInline):
-    model = Contact
+class CommunicationInline(admin.TabularInline):
+    model = Communication
     extra = 0
 
 
@@ -69,8 +67,60 @@ class EntityAdmin(admin.ModelAdmin):
         VolunteerInformationInline,
         PhoneInline,
         AddressInline,
-        ContactInline,
+        CommunicationInline,
     ]
+
+
+class ServiceInline(admin.TabularInline):
+    model = Service
+    extra = 0
+
+
+class FamilyMemberInline(admin.TabularInline):
+    model = FamilyMember
+    extra = 0
+
+
+class ClientInformationAdmin(admin.ModelAdmin):
+    list_display = ('type',)
+    fieldsets = []
+    inlines = [
+        FamilyMemberInline,
+        ServiceInline,
+    ]
+
+
+class DonationInline(admin.TabularInline):
+    model = Donation
+    extra = 0
+
+
+class DonorInformationAdmin(admin.ModelAdmin):
+    list_display = ('type',
+                    'category',
+    )
+    fieldsets = [
+    ]
+    inlines = [
+        DonationInline,
+    ]
+
+
+class SkillInline(admin.TabularInline):
+    model = Skill
+    extra = 0
+
+
+class VolunteerInformationAdmin(admin.ModelAdmin):
+    list_display = ('active',)
+    fieldsets = []
+    inlines = [
+        SkillInline,
+    ]
+
 
 # Register your models here.
 admin.site.register(Entity, EntityAdmin)
+admin.site.register(DonorInformation, DonorInformationAdmin)
+admin.site.register(ClientInformation, ClientInformationAdmin)
+admin.site.register(VolunteerInformation, VolunteerInformationAdmin)

@@ -24,10 +24,8 @@ urlpatterns = patterns('',
     # url(r'^$', 'donor_log.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^entities/', include('tracking.urls')),
-    url(r'^admin/', include(admin.site.urls)),
     url(r'^', include(router.urls)),
     url(r'^meta_data/(?P<resource_id>\d+)[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),
     url(r'^meta_data[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),
-    url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
+    url(r'^', include('rest_framework.urls', namespace='rest_framework')),
 )

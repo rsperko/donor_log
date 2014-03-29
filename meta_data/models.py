@@ -1,9 +1,6 @@
 from django.db import models
 
-from entity.models import META_DATA as ENTITY_META_DATA
-from entity.models import META_DATA as DONOR_META_DATA
-from client.models import META_DATA as CLIENT_META_DATA
-from volunteer.models import META_DATA as VOLUNTEER_META_DATA
+from tracking.models import ENTITY_META_DATA, CLIENT_META_DATA, VOLUNTEER_META_DATA, DONOR_META_DATA
 
 # Create your models here.
 

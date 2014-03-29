@@ -38,10 +38,7 @@ INSTALLED_APPS = (
     'south',
     'rest_framework',
 
-    'entity',
-    'client',
-    'donor',
-    'volunteer',
+    'tracking',
 )
 
 MIDDLEWARE_CLASSES = (
