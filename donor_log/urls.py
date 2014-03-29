@@ -13,7 +13,7 @@ from tracking.views import EntityViewSet, \
 from meta_data.views import MetaDataViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
-router = routers.DefaultRouter()
+router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'entities', EntityViewSet)
 router.register(r'donors', DonorInformationViewSet)
 router.register(r'clients', ClientInformationViewSet)
@@ -24,7 +24,7 @@ urlpatterns = patterns('',
     # url(r'^$', 'donor_log.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-    url(r'^entities/', include('tracking.urls')),
+#    url(r'^entities/', include('tracking.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/meta_data/(?P<resource_id>\d+)[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),
     url(r'^api/meta_data[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),

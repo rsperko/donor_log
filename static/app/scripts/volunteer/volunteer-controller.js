@@ -16,9 +16,11 @@ angular.module('trackingApp')
 
             init = function() {
                 $scope.model = model(id);
-                $scope.model.load().then(function(){
-                    fillFrom($scope.model);
-                });
+                if(id) {
+                    $scope.model.load().then(function () {
+                        fillFrom($scope.model);
+                    });
+                }
 
                 setupActions();
             };

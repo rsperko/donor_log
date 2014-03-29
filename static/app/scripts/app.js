@@ -12,7 +12,7 @@ angular.module('trackingApp', [
         templateUrl: 'views/dashboard/main.html',
         controller: 'dashboardCtrl'
       })
-      .when('/volunteer/:id', {
+      .when('/volunteer/:id?', {
         templateUrl: 'views/volunteer/main.html',
         controller: 'volunteerCtrl'
       })

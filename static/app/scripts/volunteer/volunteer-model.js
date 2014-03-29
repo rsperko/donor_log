@@ -10,7 +10,18 @@ angular.module('trackingApp')
             }
 
             self.id = id;
-            self.data = data;
+            if(! data) {
+                data = {
+                    addresses: [],
+                    email: '',
+                    first_name: '',
+                    institution_name: '',
+                    last_name: '',
+                    notes: '',
+                    phones: []
+                };
+            }
+            _.extend(self, data);
 
             return self;
         };
@@ -20,7 +31,7 @@ angular.module('trackingApp')
                 defer = $q.defer();
 
             resource.get({id: self.id}, function(result) {
-                self.data = result;
+                _.extend(self, result);
                 defer.resolve(self);
             });
 
@@ -31,10 +42,16 @@ angular.module('trackingApp')
             var self = this,
                 defer = $q.defer();
 
-            resource.update(self.data, function(result) {
-                self.data = result;
+            var success = function (result) {
+                _.extend(self, result);
                 defer.resolve(self);
-            });
+            };
+            if(self.id) {
+                resource.update(self, success);
+            }
+            else {
+                resource.save(self, success);
+            }
 
             return defer.promise;
         };
