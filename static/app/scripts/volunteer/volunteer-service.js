@@ -5,6 +5,7 @@ angular.module('trackingApp')
         var service = resourceFactory("/api/entities/:id",
             {
                 id:"@id"
+            }, {
             });
         return service;
     }])

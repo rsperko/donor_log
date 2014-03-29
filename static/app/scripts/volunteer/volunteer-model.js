@@ -56,5 +56,29 @@ angular.module('trackingApp')
             return defer.promise;
         };
 
+        Model.prototype.newPhone = function() {
+            var self = this,
+                phone = {
+                primary: ! self.phones.length,
+                number: '',
+                type: ''
+            };
+            self.phones.push(phone);
+        };
+
+        Model.prototype.newAddress = function() {
+            var self = this,
+                address = {
+                    primary: ! self.addresses.length,
+                    care_of: '',
+                    line1: '',
+                    line2: '',
+                    city: '',
+                    state: '',
+                    postalCode: ''
+                };
+            self.addresses.push(address);
+        };
+
         return Model;
     }]);

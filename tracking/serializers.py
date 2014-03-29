@@ -32,7 +32,7 @@ class AddressSerializer(serializers.ModelSerializer):
         )
 
 
-class ContactSerializer(serializers.ModelSerializer):
+class CommunicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Communication
         fields = (
@@ -128,7 +128,7 @@ class VolunteerInformationSerializer(serializers.ModelSerializer):
 class EntitySerializer(serializers.ModelSerializer):
     phones = PhoneSerializer(many=True)
     addresses = AddressSerializer(many=True)
-    contacts = ContactSerializer(many=True)
+    contacts = CommunicationSerializer(many=True)
     # donor_information = DonorInformationSerializer()
     # client_information = ClientInformationSerializer()
     # volunteer_information = VolunteerInformationSerializer()

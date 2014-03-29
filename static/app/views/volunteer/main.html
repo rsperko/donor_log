@@ -1,14 +1,51 @@
 <h2>Volunteer Information</h2>
 
 <input type="text"
+       placeholder="First Name"
        ng-model="model.first_name">
 
 <input type="text"
+       placeholder="Last Name"
        ng-model="model.last_name">
 
 <input type="text"
+       placeholder="email"
        ng-model="model.email">
-
-<textarea ng-model="model.notes"></textarea>
-
+<br>
+<div ng-repeat="phone in model.phones">
+    <input type="text"
+           placeholder="414-444-4444"
+           ng-model="phone.number">
+    <input type="text"
+           placeholder="(H,M,W,O)"
+           ng-model="phone.type">
+    <input type="radio"
+           name="phone-primary"
+           ng-model="phone.primary"
+           ng-value="true"
+           ng-click="primaryPhone($index)">
+    <button ng-click="deletePhone($index)">remove</button>
+</div>
+<button ng-click="addPhone()">Add Phone</button>
+<br>
+<div ng-repeat="address in model.addresses">
+    <input type="text"
+           placeholder="line1"
+           ng-model="address.line1">
+    <input type="text"
+           placeholder="line2"
+           ng-model="address.line2">
+    <input type="text"
+           placeholder="city"
+           ng-model="address.city">
+    <input type="text"
+           placeholder="state"
+           ng-model="address.state">
+    <input type="text"
+           placeholder="postalCode"
+           ng-model="address.postalCode">
+</div>
+<br>
+<textarea ng-model="model.notes" placeholder="Notes"></textarea>
+<br>
 <button type="submit" ng-click="save()">Save</button>
