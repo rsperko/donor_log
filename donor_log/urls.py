@@ -14,10 +14,10 @@ from meta_data.views import MetaDataViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter()
-router.register(r'entity', EntityViewSet)
+router.register(r'entities', EntityViewSet)
 router.register(r'donors', DonorInformationViewSet)
-router.register(r'client', ClientInformationViewSet)
-router.register(r'volunteer', VolunteerInformationViewSet)
+router.register(r'clients', ClientInformationViewSet)
+router.register(r'volunteers', VolunteerInformationViewSet)
 
 urlpatterns = patterns('',
     # Examples:
@@ -26,8 +26,8 @@ urlpatterns = patterns('',
 
     url(r'^entities/', include('tracking.urls')),
     url(r'^admin/', include(admin.site.urls)),
-    url(r'^', include(router.urls)),
     url(r'^meta_data/(?P<resource_id>\d+)[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),
     url(r'^meta_data[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),
+    url(r'^api/', include(router.urls)),
     url(r'^api/', include('rest_framework.urls', namespace='rest_framework')),
 )

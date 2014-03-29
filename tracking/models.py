@@ -159,13 +159,13 @@ class FamilyMember(models.Model):
         TYPE_SPOUSE: 'Spouse',
         TYPE_PARENT: 'Parent',
         TYPE_SIBLING: 'Sibling',
-        }
+    }
     SEX_MALE = 'M'
     SEX_FEMALE = 'F'
     SEXES = {
         SEX_FEMALE: 'Female',
         SEX_MALE: 'Male',
-        }
+    }
     client = models.ForeignKey(ClientInformation, related_name='family_members')
     type = models.CharField(max_length=1,
                             choices=tuple(sorted(TYPES.items())),
@@ -185,7 +185,7 @@ class DonorInformation(models.Model):
     TYPES = {
         TYPE_DONOR: 'Donor',
         TYPE_PARTNER: 'Partner',
-        }
+    }
     CATEGORY_INDIVIDUAL = 'I'
     CATEGORY_BUSINESS = 'B'
     CATEGORY_NON_PROFIT = 'N'
@@ -199,7 +199,7 @@ class DonorInformation(models.Model):
         CATEGORY_NON_PROFIT: 'Non-Profit',
         CATEGORY_OTHER: 'Other - see notes',
         CATEGORY_UNSET: 'Unset',
-        }
+    }
     entity = models.ForeignKey(Entity,
                                related_name='donor_information')
     category = models.CharField(max_length=1,
@@ -226,7 +226,7 @@ class Donation(models.Model):
         TYPE_MONEY: 'Money',
         TYPE_IN_KIND: 'In-Kind',
         TYPE_OTHER: 'Other - see notes',
-        }
+    }
     donor = models.ForeignKey(DonorInformation, related_name='donations')
     date = models.DateField(default=datetime.date.today)
     monetary_amount = models.DecimalField(decimal_places=2,
@@ -261,7 +261,7 @@ class Skill(models.Model):
         TYPE_WAREHOUSE: 'Warehouse',
         TYPE_OTHER: 'Other - see notes',
         TYPE_SPEAKING: 'Public Speaking',
-        }
+    }
     volunteer = models.ForeignKey(VolunteerInformation, related_name='skills')
     type = models.CharField(max_length=1,
                             choices=tuple(sorted(TYPES.items())),
