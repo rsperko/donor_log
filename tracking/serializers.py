@@ -40,6 +40,7 @@ class CommunicationSerializer(serializers.ModelSerializer):
             'date_time',
             'type',
             'notes',
+            'connected',
         )
 
 
@@ -128,7 +129,7 @@ class VolunteerInformationSerializer(serializers.ModelSerializer):
 class EntitySerializer(serializers.ModelSerializer):
     phones = PhoneSerializer(many=True, allow_add_remove=True)
     addresses = AddressSerializer(many=True, allow_add_remove=True)
-    contacts = CommunicationSerializer(many=True, allow_add_remove=True)
+    communications = CommunicationSerializer(many=True, allow_add_remove=True)
     # donor_information = DonorInformationSerializer()
     # client_information = ClientInformationSerializer()
     # volunteer_information = VolunteerInformationSerializer()
@@ -145,6 +146,7 @@ class EntitySerializer(serializers.ModelSerializer):
             'notes',
             'phones',
             'addresses',
+            'communications',
             # 'donor_information',
             # 'client_information',
             # 'volunteer_information',

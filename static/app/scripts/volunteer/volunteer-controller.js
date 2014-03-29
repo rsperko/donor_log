@@ -11,6 +11,9 @@ angular.module('trackingApp')
                 if(! $scope.model.addresses.length) {
                     $scope.model.newAddress();
                 }
+                if(! $scope.model.communications.length) {
+                    $scope.createCommunication();
+                }
             },
 
             setupActions = function() {
@@ -33,6 +36,23 @@ angular.module('trackingApp')
                     _.each($scope.model.phones, function(phone, index) {
                         phone.primary = index === phoneIndex;
                     });
+                };
+
+                $scope.createCommunication = function() {
+                    $scope.newCommunication = $scope.model.createCommunication();
+                };
+
+                $scope.saveNewCommunication = function() {
+                    $scope.model.addCommunication($scope.newCommunication);
+                    $scope.newCommunication = null;
+                };
+
+                $scope.cancelNewCommunication = function() {
+                    $scope.newCommunication = null;
+                };
+
+                $scope.deleteCommunication = function(communicationIndex) {
+                    $scope.model.deleteCommunication($scope.model.communications[communicationIndex]);
                 };
             },
 

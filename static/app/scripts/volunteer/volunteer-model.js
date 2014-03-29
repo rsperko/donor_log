@@ -18,7 +18,8 @@ angular.module('trackingApp')
                     institution_name: '',
                     last_name: '',
                     notes: '',
-                    phones: []
+                    phones: [],
+                    communications: []
                 };
             }
             _.extend(self, data);
@@ -64,6 +65,7 @@ angular.module('trackingApp')
                 type: ''
             };
             self.phones.push(phone);
+            return phone;
         };
 
         Model.prototype.newAddress = function() {
@@ -78,6 +80,45 @@ angular.module('trackingApp')
                     postalCode: ''
                 };
             self.addresses.push(address);
+            return address;
+        };
+
+        Model.prototype.createCommunication = function() {
+            var self = this,
+                communication = {
+                    date_time: '',
+                    type: '',
+                    notes: '',
+                    connected: true,
+                    entity_id: self.id
+                };
+            return communication;
+        };
+
+        Model.prototype.addCommunication = function(communication) {
+            var self = this,
+                defer = $q.defer();
+
+            var success = function (result) {
+                _.extend(self, result);
+                defer.resolve(self);
+            };
+            resource.addCommunication(communication, success);
+
+            return defer.promise;
+        };
+
+        Model.prototype.deleteCommunication = function(communication) {
+            var self = this,
+                defer = $q.defer();
+
+            var success = function (result) {
+                _.extend(self, result);
+                defer.resolve(self);
+            };
+            resource.deleteCommunication(communication, success);
+
+            return defer.promise;
         };
 
         return Model;

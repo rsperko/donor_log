@@ -21,18 +21,46 @@ class EntityViewSet(viewsets.ModelViewSet):
     queryset = Entity.objects.all()
     serializer_class = EntitySerializer
 
-    @action(methods=['POST'])
-    def phones(self, request, pk=None):
-        entity = self.get_object()
-        phone_serializer = PhoneSerializer(data=request.DATA)
-        if phone_serializer.is_valid():
-            entity.phones.add(phone_serializer.data)
-            entity.save()
+    def __add_communication(self, comm_serializer):
+        if comm_serializer.is_valid():
+            entity = self.get_object()
+            comm_serializer.object.entity_id = entity.id
+            comm_serializer.save()
             entity_serializer = EntitySerializer(entity)
             return Response(entity_serializer.data)
         else:
-            return Response(phone_serializer.errors,
+            return Response(comm_serializer.errors,
                             status=status.HTTP_400_BAD_REQUEST)
+
+    def __delete_communication(self, comm_serializer):
+        if comm_serializer.is_valid():
+            comm_serializer.save()
+            entity = self.get_object()
+            entity_serializer = EntitySerializer(entity)
+            return Response(entity_serializer.data)
+        else:
+            return Response(comm_serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
+
+    def __update_communication(self, comm_serializer):
+        if comm_serializer.is_valid():
+            comm_serializer.delete()
+            entity = self.get_object()
+            entity_serializer = EntitySerializer(entity)
+            return Response(entity_serializer.data)
+        else:
+            return Response(comm_serializer.errors,
+                            status=status.HTTP_400_BAD_REQUEST)
+
+    @action(methods=['POST', 'DELETE', 'PUT'])
+    def communications(self, request, pk=None):
+        comm_serializer = CommunicationSerializer(data=request.DATA)
+        if request.method == 'POST':
+            return self.__add_communication(comm_serializer)
+        elif request.method == 'DELETE':
+            return self.__delete_communication(comm_serializer)
+        else:
+            return self.__update_communication(comm_serializer)
 
 
 class ClientInformationViewSet(viewsets.ModelViewSet):

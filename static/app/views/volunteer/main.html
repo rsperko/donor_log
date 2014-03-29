@@ -1,5 +1,6 @@
 <h2>Volunteer Information</h2>
 
+<div name="volunteer-form">
 <input type="text"
        placeholder="First Name"
        ng-model="model.first_name">
@@ -24,9 +25,9 @@
            ng-model="phone.primary"
            ng-value="true"
            ng-click="primaryPhone($index)">
-    <button ng-click="deletePhone($index)">remove</button>
+    <button ng-click="deletePhone($index)">-</button>
 </div>
-<button ng-click="addPhone()">Add Phone</button>
+<button ng-click="addPhone()">+</button>
 <br>
 <div ng-repeat="address in model.addresses">
     <input type="text"
@@ -49,3 +50,30 @@
 <textarea ng-model="model.notes" placeholder="Notes"></textarea>
 <br>
 <button type="submit" ng-click="save()">Save</button>
+</div>
+
+<div name="communications">
+    <h3>Communications</h3>
+<button ng-click="createCommunication()" ng-show="! newCommunication">+</button>
+<div name="communications-form" ng-show="newCommunication">
+    <input type="checkbox"
+           name="connected"
+           ng-model="newCommunication.connected">
+    <label for="connected">Connected</label>
+    <input type="text"
+           placeholder="YYYY-MM-DDThh:mm"
+           ng-model="newCommunication.date_time">
+    <input type="text"
+           placeholder="P,E,I,O"
+           ng-model="newCommunication.type">
+    <textarea placeholder="Notes"
+              ng-model="newCommunication.notes"></textarea>
+    <button type="submit" ng-click="saveNewCommunication()">Save</button>
+    <button ng-click="cancelNewCommunication()">Cancel</button>
+</div>
+<div ng-repeat="communication in model.communications">
+    <span>{{ communication.date_time }}</span>
+    <span>{{ communication.type }}</span>
+    <button ng-click="deleteCommunication($index)">-</button>
+</div>
+</div>
