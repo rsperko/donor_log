@@ -2,9 +2,9 @@
 
 angular.module('trackingApp')
     .factory('volunteerResource', ["resourceFactory", function(resourceFactory) {
-        var service = resourceFactory("/api/entities/:entityId",
+        var service = resourceFactory("/api/entities/:id",
             {
-                entityId:"@entityId"
+                id:"@id"
             });
         return service;
     }])

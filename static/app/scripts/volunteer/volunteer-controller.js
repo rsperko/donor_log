@@ -2,8 +2,26 @@
 
 angular.module('trackingApp')
     .controller('volunteerCtrl', ["$scope", "$routeParams", "volunteerModel", function ($scope, $routeParams, model) {
-        $scope.model = model($routeParams['entityId']);
-        $scope.model.load().then(function(){
-            console.log($scope.model);
-        });
+        var id = $routeParams['id'],
+
+            fillFrom = function(model) {
+
+            },
+
+            setupActions = function() {
+                $scope.save = function() {
+                    $scope.model.save();
+                };
+            },
+
+            init = function() {
+                $scope.model = model(id);
+                $scope.model.load().then(function(){
+                    fillFrom($scope.model);
+                });
+
+                setupActions();
+            };
+
+        init();
     }]);
