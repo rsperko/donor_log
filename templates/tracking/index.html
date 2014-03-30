@@ -1,0 +1,53 @@
+{% extends "base.html
+{% load staticfiles %}
+
+{% block content %}
+    <div ng-app="trackingApp">
+    <!--[if lt IE 7]>
+      <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+    <![endif]-->
+
+    <!-- Add your site or application content here -->
+    <div class="header">
+        <a href="#/volunteers">Volunteers</a>
+    </div>
+    <div class="actionbar">
+        <a href="#/volunteer/">New Volunteer</a>
+    </div>
+    <div class="container" ng-view=""></div>
+
+    <!--[if lt IE 9]>
+    <script src="/static/app/bower_components/es5-shim/es5-shim.js"></script>
+    <script src="/static/app/bower_components/json3/lib/json3.min.js"></script>
+    <![endif]-->
+
+    <!-- build:js scripts/vendor.js -->
+    <!-- bower:js -->
+    <script src="/static/app/bower_components/jquery/jquery.js"></script>
+    <script src="/static/app/bower_components/angular/angular.js"></script>
+    <script src="/static/app/bower_components/sass-bootstrap/dist/js/bootstrap.js"></script>
+    <script src="/static/app/bower_components/angular-resource/angular-resource.js"></script>
+    <script src="/static/app/bower_components/angular-cookies/angular-cookies.js"></script>
+    <script src="/static/app/bower_components/angular-sanitize/angular-sanitize.js"></script>
+    <script src="/static/app/bower_components/angular-route/angular-route.js"></script>
+    <script src="/static/app/bower_components/lodash/dist/lodash.js"></script>
+    <!-- endbower -->
+    <!-- endbuild -->
+
+        <!-- build:js({.tmp,app}) scripts/scripts.js -->
+        <script src="/static/app/scripts/app.js"></script>
+        <script src="/static/app/scripts/metadata/metadata-service.js"></script>
+        <script src="/static/app/scripts/common/services/resource-factory.js"></script>
+        <script src="/static/app/scripts/volunteer/volunteer-list-controller.js"></script>
+        <script src="/static/app/scripts/volunteer/volunteer-service.js"></script>
+        <script src="/static/app/scripts/volunteer/volunteer-model.js"></script>
+        <script src="/static/app/scripts/volunteer/volunteer-controller.js"></script>
+        <script src="/static/app/scripts/entity/entity-mixins.js"></script>
+        <script src="/static/app/scripts/entity/entity-service.js"></script>
+        <script src="/static/app/scripts/entity/entity-model.js"></script>
+        <script src="/static/app/scripts/dashboard/dashboard-service.js"></script>
+        <script src="/static/app/scripts/dashboard/dashboard-model.js"></script>
+        <script src="/static/app/scripts/dashboard/dashboard-controller.js"></script>
+        <!-- endbuild -->
+    </div>
+{% endblock %}

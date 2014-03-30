@@ -1,6 +1,7 @@
 from django.conf.urls import patterns, include, url
 
 from django.contrib import admin
+from django.views.generic import TemplateView
 
 admin.autodiscover()
 
@@ -24,7 +25,12 @@ urlpatterns = patterns('',
     # url(r'^$', 'donor_log.views.home', name='home'),
     # url(r'^blog/', include('blog.urls')),
 
-#    url(r'^entities/', include('tracking.urls')),
+    # Login / logout.
+    (r'^accounts/login/$', 'django.contrib.auth.views.login'),
+
+    (r'^tracking/', TemplateView.as_view(template_name = 'tracking/index.html')),
+
+    # url(r'^entities/', include('tracking.urls')),
     url(r'^admin/', include(admin.site.urls)),
     url(r'^api/meta_data/(?P<resource_id>\d+)[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),
     url(r'^api/meta_data[/]?$', MetaDataViewSet.as_view(), name='meta_data_view'),

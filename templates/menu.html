@@ -1,5 +1,5 @@
 {% block header %}
-    <a class="menuitem" href="{% url 'index' %}">{% trans "Home" %}</a>
+    <a class="menuitem" href="/">Home</a>
 
     {% if user.is_authenticated %}
         {% if user.is_staff %}
