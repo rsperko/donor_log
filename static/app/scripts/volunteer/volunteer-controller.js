@@ -13,7 +13,6 @@ angular.module('trackingApp')
                 _.each(metaData.volunteer.skill.types, function(value, key) {
                     $scope.skills[key] = $scope.model.volunteer_information[0].hasSkill(key);
                 });
-                console.log($scope);
             },
 
             setupVolunteerActions = function() {
@@ -40,7 +39,7 @@ angular.module('trackingApp')
                 }
             };
 
-        _.extend(self, new EntityControllerMixin($scope));
+        new EntityControllerMixin($scope).apply(self);
 
         metaData.then(init);
     }]);

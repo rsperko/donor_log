@@ -42,5 +42,8 @@ function EntityControllerMixin($scope) {
             $scope.model.deleteCommunication($scope.model.communications[communicationIndex]);
         };
     };
-
 }
+
+EntityControllerMixin.prototype.apply = function(target) {
+    _.extend(target, this);
+};
