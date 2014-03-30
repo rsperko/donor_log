@@ -17,9 +17,9 @@
     <input type="text"
            placeholder="414-444-4444"
            ng-model="phone.number">
-    <input type="text"
-           placeholder="(H,M,W,O)"
-           ng-model="phone.type">
+    <select ng-model="phone.type"
+            ng-options="key as label for (key, label) in metaData.entity.phone.types"
+            ></select>
     <input type="radio"
            name="phone-primary"
            ng-model="phone.primary"
@@ -39,9 +39,9 @@
     <input type="text"
            placeholder="city"
            ng-model="address.city">
-    <input type="text"
-           placeholder="state"
-           ng-model="address.state">
+    <select ng-model="address.state"
+            ng-options="key as label for (key, label) in metaData.entity.address.states"
+            ></select>
     <input type="text"
            placeholder="postalCode"
            ng-model="address.postalCode">
@@ -50,6 +50,12 @@
 <textarea ng-model="model.notes" placeholder="Notes"></textarea>
 <br>
     <h3>Skills</h3>
+    <input type="checkbox"
+            ng-repeat-start="(key, value) in metaData.volunteer.skill.types"
+            ng-model="skills[key]"
+            ng-change="toggleSkill(key)"
+            name="skill-{{ key }}">
+    <label ng-repeat-end for="skill-{{ key }}">{{ value }}</label>
     <h3>Emergency Contact</h3>
     <input type="text"
            placeholder="Name"
@@ -72,9 +78,9 @@
     <input type="text"
            placeholder="YYYY-MM-DD"
            ng-model="newCommunication.date">
-    <input type="text"
-           placeholder="P,E,I,O"
-           ng-model="newCommunication.type">
+    <select ng-model="newCommunication.type"
+            ng-options="key as label for (key, label) in metaData.entity.communication.types"
+            ></select>
     <textarea placeholder="Notes"
               ng-model="newCommunication.notes"></textarea>
     <button type="submit" ng-click="saveNewCommunication()">Save</button>

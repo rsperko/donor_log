@@ -87,7 +87,6 @@ class SkillSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'type',
-            'notes',
         )
 
 

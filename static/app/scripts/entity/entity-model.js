@@ -23,7 +23,8 @@ angular.module('trackingApp')
                     volunteer_information: []
                 };
             }
-            _.extend(self, data);
+
+            self.applyData(data);
 
             return self;
         };
@@ -33,11 +34,20 @@ angular.module('trackingApp')
                 defer = $q.defer();
 
             resource.get({id: self.id}, function(result) {
-                _.extend(self, result);
+                self.applyData(result);
                 defer.resolve(self);
             });
 
             return defer.promise;
+        };
+
+        Model.prototype.applyData = function(data) {
+            var self = this;
+            _.extend(self, data);
+
+            _.each(self.volunteer_information, function(vol_info, index) {
+                self.volunteer_information[index] = volunteerModel(vol_info.id, vol_info);
+            });
         };
 
         Model.prototype.save = function() {
@@ -45,7 +55,7 @@ angular.module('trackingApp')
                 defer = $q.defer();
 
             var success = function (result) {
-                _.extend(self, result);
+                self.applyData(result);
                 defer.resolve(self);
             };
             if(self.id) {
@@ -100,7 +110,7 @@ angular.module('trackingApp')
             var self = this,
                 communication = {
                     date: $filter('date')(new Date(), 'yyyy-MM-dd'),
-                    type: '',
+                    type: 'P',
                     notes: '',
                     connected: true,
                     entity: self.id
@@ -113,7 +123,7 @@ angular.module('trackingApp')
                 defer = $q.defer();
 
             var success = function (result) {
-                _.extend(self, result);
+                self.applyData(result);
                 defer.resolve(self);
             };
             resource.addCommunication(communication, success);
@@ -126,7 +136,7 @@ angular.module('trackingApp')
                 defer = $q.defer();
 
             var success = function (result) {
-                _.extend(self, result);
+                self.applyData(result);
                 defer.resolve(self);
             };
             resource.deleteCommunication({id: self.id, comm_id: communication.id}, success);

@@ -270,30 +270,96 @@ class Skill(models.Model):
     type = models.CharField(max_length=1,
                             choices=tuple(sorted(TYPES.items())),
                             default=TYPE_SORTING)
-    notes = models.TextField(blank=True)
+
+COMMON_META_DATA = {
+
+}
 
 
 VOLUNTEER_META_DATA = {
-    'SKILLS': {'TYPES': Skill.TYPES},
+    'skill': {'types': Skill.TYPES},
 }
 
 
 DONOR_META_DATA = {
-    'DONOR_INFORMATION': {
-        'CATEGORIES': DonorInformation.CATEGORIES,
-        'TYPES': DonorInformation.TYPES,
-        },
-    'DONATION': {'TYPES': Donation.TYPES},
+    'donor_information': {
+        'categories': DonorInformation.CATEGORIES,
+        'types': DonorInformation.TYPES,
+    },
+    'donation': {'types': Donation.TYPES},
 }
 
 
 CLIENT_META_DATA = {
-    'CLIENT_INFORMATION': {'TYPES': ClientInformation.TYPES},
-    'SERVICE': {'TYPES': Service.TYPES},
-    'FAMILY_MEMBER': {'TYPES': FamilyMember.TYPES, 'SEXES': FamilyMember.SEXES},
+    'client_information': {'types': ClientInformation.TYPES},
+    'service': {'types': Service.TYPES},
+    'family_member': {'types': FamilyMember.TYPES, 'sexes': FamilyMember.SEXES},
 }
 
 ENTITY_META_DATA = {
-    'PHONE': {'TYPES': Phone.TYPES},
-    'COMMUNICATION': {'TYPES': Communication.TYPES},
+    'phone': {'types': Phone.TYPES},
+    'communication': {'types': Communication.TYPES},
+    'address' : {
+        'states': {
+            'AL': 'Alabama',
+            'AK': 'Alaska',
+            'AS': 'American Samoa',
+            'AZ': 'Arizona',
+            'AR': 'Arkansas',
+            'CA': 'California',
+            'CO': 'Colorado',
+            'CT': 'Connecticut',
+            'DE': 'Delaware',
+            'DC': 'Dist. of Columbia',
+            'FL': 'Florida',
+            'GA': 'Georgia',
+            'GU': 'Guam',
+            'HI': 'Hawaii',
+            'ID': 'Idaho',
+            'IL': 'Illinois',
+            'IN': 'Indiana',
+            'IA': 'Iowa',
+            'KS': 'Kansas',
+            'KY': 'Kentucky',
+            'LA': 'Louisiana',
+            'ME': 'Maine',
+            'MD': 'Maryland',
+            'MH': 'Marshall Islands',
+            'MA': 'Massachusetts',
+            'MI': 'Michigan',
+            'FM': 'Micronesia',
+            'MN': 'Minnesota',
+            'MS': 'Mississippi',
+            'MO': 'Missouri',
+            'MT': 'Montana',
+            'NE': 'Nebraska',
+            'NV': 'Nevada',
+            'NH': 'New Hampshire',
+            'NJ': 'New Jersey',
+            'NM': 'New Mexico',
+            'NY': 'New York',
+            'NC': 'North Carolina',
+            'ND': 'North Dakota',
+            'MP': 'Northern Marianas',
+            'OH': 'Ohio',
+            'OK': 'Oklahoma',
+            'OR': 'Oregon',
+            'PW': 'Palau',
+            'PA': 'Pennsylvania',
+            'PR': 'Puerto Rico',
+            'RI': 'Rhode Island',
+            'SC': 'South Carolina',
+            'SD': 'South Dakota',
+            'TN': 'Tennessee',
+            'TX': 'Texas',
+            'UT': 'Utah',
+            'VT': 'Vermont',
+            'VA': 'Virginia',
+            'VI': 'Virgin Islands',
+            'WA': 'Washington',
+            'WV': 'West Virginia',
+            'WI': 'Wisconsin',
+            'WY': 'Wyoming',
+        }
+    }
 }

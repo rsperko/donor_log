@@ -13,8 +13,7 @@ from .serializers import EntitySerializer, \
     ClientInformationSerializer, \
     DonorInformationSerializer, \
     VolunteerInformationSerializer, \
-    CommunicationSerializer, \
-    PhoneSerializer
+    CommunicationSerializer
 
 
 class EntityViewSet(viewsets.ModelViewSet):

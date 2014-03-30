@@ -18,7 +18,7 @@ angular.module('trackingApp')
                     skills: []
                 };
             }
-            _.extend(self, data);
+            self.applyData(data);
 
             return self;
         };
@@ -28,11 +28,16 @@ angular.module('trackingApp')
                 defer = $q.defer();
 
             resource.get({id: self.id}, function(result) {
-                _.extend(self, result);
+                self.applyData(result);
                 defer.resolve(self);
             });
 
             return defer.promise;
+        };
+
+        Model.prototype.applyData = function(data) {
+            var self = this;
+            _.extend(self, data);
         };
 
         Model.prototype.save = function() {
@@ -40,7 +45,7 @@ angular.module('trackingApp')
                 defer = $q.defer();
 
             var success = function (result) {
-                _.extend(self, result);
+                self.applyData(result);
                 defer.resolve(self);
             };
             if(self.id) {
@@ -56,6 +61,28 @@ angular.module('trackingApp')
         Model.prototype.ensureSkills = function() {
             if(! this.skills) {
                 this.skills = [];
+            }
+        };
+
+        Model.prototype.hasSkill = function(skillCode) {
+            var self = this,
+                ret = _.findIndex(self.skills, function(skill) {
+                return skill.type === skillCode;
+            });
+            return ret !== -1;
+        };
+
+        Model.prototype.toggleSkill = function(skillCode) {
+            var self = this;
+            var index = _.findIndex(self.skills, function(skill) {
+                return skill.type === skillCode;
+            });
+
+            if(index >= 0) {
+                self.skills.splice(index, 1);
+            }
+            else {
+                self.skills.push({ type: skillCode });
             }
         };
 
