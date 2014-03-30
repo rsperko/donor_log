@@ -6,7 +6,7 @@ angular.module('trackingApp')
         var Model = function(id, data) {
             var self = this;
             if (self instanceof Model === false) {
-                self = new Model();
+                self = new Model(id, data);
             }
 
             self.id = id;
@@ -149,6 +149,16 @@ angular.module('trackingApp')
                 this.volunteer_information.push(volunteerModel());
             }
             this.volunteer_information[0].ensureSkills();
+        };
+
+        Model.prototype.getName = function() {
+            var self = this;
+            if(self.institution_name) {
+                return self.institution_name;
+            }
+            else {
+                return self.first_name + " " + self.last_name;
+            }
         };
 
         return Model;

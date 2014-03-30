@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('trackingApp')
-    .controller('volunteerCtrl', ["$scope", "$routeParams", "metaDataService", "entityModel", function ($scope, $routeParams, metaData, model) {
+    .controller('volunteerCtrl', ["$scope", "$routeParams", "metaDataService", "entityModel",
+        function ($scope, $routeParams, metaData, model) {
         var self = this,
             id = $routeParams['id'],
 

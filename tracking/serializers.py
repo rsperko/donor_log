@@ -9,11 +9,27 @@ from .models import Entity, Phone, Address, Communication, \
 class PhoneSerializer(serializers.ModelSerializer):
     class Meta:
         model = Phone
+        fields = (
+            'id',
+            'primary',
+            'number',
+            'type',
+        )
 
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = Address
+        fields = (
+            'id',
+            'primary',
+            'care_of',
+            'line1',
+            'line2',
+            'city',
+            'state',
+            'postalCode',
+        )
 
 
 class CommunicationSerializer(serializers.ModelSerializer):

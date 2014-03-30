@@ -1,0 +1,39 @@
+<input type="text"
+       placeholder="First Name"
+       ng-model="criteria.first_name"/>
+<input type="text"
+       placeholder="Last Name"
+       ng-model="criteria.last_name"/>
+<input type="checkbox"
+       id="active"
+       ng-model="criteria.active"/>
+<label for="active">Active</label>
+<br>
+<input type="checkbox"
+       ng-repeat-start="(key, value) in metaData.volunteer.skill.types"
+       ng-model="skills[key]"
+       id="skill-{{ key }}">
+<label ng-repeat-end for="skill-{{ key }}">{{ value }}</label>
+<br>
+<button type="submit" ng-click="search()" class="btn btn-default">Search</button>
+<p>
+    <div ng-show="! results.length">
+        <span>No Results</span>
+    </div>
+    <div ng-show="results.length">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Active</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="entity in results">
+                    <td><a href="#/volunteer/{{ entity.id }}">{{ entity.getName() }}</a></td>
+                    <td>{{ entity.volunteer_information[0].active }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</p>

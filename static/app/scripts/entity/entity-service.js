@@ -11,23 +11,4 @@ angular.module('trackingApp')
                 'deleteCommunication': {method: 'DELETE', params: { action: 'communications' }}
             });
         return service;
-    }])
-    .factory('entityService', ["entityModel", "$http", "$q", function(entityModel, $http, $q) {
-        var load = function() {
-            var defer = $q.defer();
-
-            $http.get('/api/entities/').then(function(result) {
-                var ret = [];
-
-                _.each(result.data, function(data) {
-                    var items = entityModel(data.id, data);
-                    ret.push(items);
-                });
-
-                defer.resolve(ret);
-            });
-
-            return defer.promise;
-        };
-        return load;
     }]);

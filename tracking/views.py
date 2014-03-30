@@ -1,4 +1,6 @@
 from rest_framework import viewsets
+from rest_framework import filters
+import django_filters
 
 # Create your views here.
 from rest_framework.decorators import action
@@ -16,9 +18,22 @@ from .serializers import EntitySerializer, \
     CommunicationSerializer
 
 
+class EntityFilter(django_filters.FilterSet):
+    first_name = django_filters.CharFilter(name='first_name', lookup_type='icontains')
+    last_name = django_filters.CharFilter(name='last_name', lookup_type='icontains')
+    skills = django_filters.CharFilter(name='volunteer_information__skills__type', lookup_type='in')
+    active = django_filters.BooleanFilter(name='volunteer_information__active', lookup_type='in')
+
+    class Meta:
+        model = Entity
+        fields = ['first_name', 'last_name', 'skills', 'active']
+
+
 class EntityViewSet(viewsets.ModelViewSet):
     queryset = Entity.objects.all()
     serializer_class = EntitySerializer
+    filter_backends = (filters.DjangoFilterBackend,)
+    filter_class = EntityFilter
 
     def __add_communication(self, comm_serializer):
         if comm_serializer.is_valid():

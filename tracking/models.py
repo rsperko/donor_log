@@ -241,7 +241,7 @@ class Donation(models.Model):
 class VolunteerInformation(models.Model):
     entity = models.ForeignKey(Entity,
                                related_name='volunteer_information')
-    active = models.BooleanField(default=False)
+    active = models.BooleanField(default=True)
     emergency_contact_name = models.CharField(max_length=50,
                                               blank=True)
     emergency_contact_number = models.CharField(max_length=12,

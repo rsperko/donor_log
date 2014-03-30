@@ -54,7 +54,7 @@
             ng-repeat-start="(key, value) in metaData.volunteer.skill.types"
             ng-model="skills[key]"
             ng-change="toggleSkill(key)"
-            name="skill-{{ key }}">
+            id="skill-{{ key }}">
     <label ng-repeat-end for="skill-{{ key }}">{{ value }}</label>
     <h3>Emergency Contact</h3>
     <input type="text"
@@ -64,6 +64,11 @@
            placeholder="Number"
            ng-model="model.volunteer_information[0].emergency_contact_number"/>
     <br>
+    <input type="checkbox"
+           id="active"
+           ng-model="model.volunteer_information[0].active"/>
+    <label for="active">Active</label>
+    <br>
 <button type="submit" ng-click="save()">Save</button>
 </div>
 
@@ -72,7 +77,7 @@
 <button ng-click="createCommunication()" ng-show="! newCommunication">+</button>
 <div name="communications-form" ng-show="newCommunication">
     <input type="checkbox"
-           name="connected"
+           id="connected"
            ng-model="newCommunication.connected">
     <label for="connected">Connected</label>
     <input type="text"
