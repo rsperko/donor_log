@@ -14,6 +14,7 @@
        ng-model="model.email">
 <br>
 <div ng-repeat="phone in model.phones">
+    <button ng-click="deletePhone($index)">-</button>
     <input type="text"
            placeholder="414-444-4444"
            ng-model="phone.number">
@@ -25,7 +26,6 @@
            ng-model="phone.primary"
            ng-value="true"
            ng-click="primaryPhone($index)">
-    <button ng-click="deletePhone($index)">-</button>
 </div>
 <button ng-click="addPhone()">+</button>
 <br>
@@ -49,6 +49,7 @@
 <br>
 <textarea ng-model="model.notes" placeholder="Notes"></textarea>
 <br>
+    <hr>
     <h3>Skills</h3>
     <input type="checkbox"
             ng-repeat-start="(key, value) in metaData.volunteer.skill.types"
@@ -56,6 +57,7 @@
             ng-change="toggleSkill(key)"
             id="skill-{{ key }}">
     <label ng-repeat-end for="skill-{{ key }}">{{ value }}</label>
+    <hr>
     <h3>Emergency Contact</h3>
     <input type="text"
            placeholder="Name"
@@ -71,29 +73,29 @@
     <br>
 <button type="submit" ng-click="save()">Save</button>
 </div>
-
-<div name="communications">
+<hr><hr>
+<div name="communications" ng-show="model.id">
     <h3>Communications</h3>
-<button ng-click="createCommunication()" ng-show="! newCommunication">+</button>
-<div name="communications-form" ng-show="newCommunication">
-    <input type="checkbox"
-           id="connected"
-           ng-model="newCommunication.connected">
-    <label for="connected">Connected</label>
-    <input type="text"
-           placeholder="YYYY-MM-DD"
-           ng-model="newCommunication.date">
-    <select ng-model="newCommunication.type"
-            ng-options="key as label for (key, label) in metaData.entity.communication.types"
-            ></select>
-    <textarea placeholder="Notes"
-              ng-model="newCommunication.notes"></textarea>
-    <button type="submit" ng-click="saveNewCommunication()">Save</button>
-    <button ng-click="cancelNewCommunication()">Cancel</button>
-</div>
-<div ng-repeat="communication in model.communications">
-    <span>{{ communication.date }}</span>
-    <span>{{ communication.type }}</span>
-    <button ng-click="deleteCommunication($index)">-</button>
-</div>
+    <button ng-click="createCommunication()" ng-show="! newCommunication">+</button>
+    <div name="communications-form" ng-show="newCommunication">
+        <input type="checkbox"
+               id="connected"
+               ng-model="newCommunication.connected">
+        <label for="connected">Connected</label>
+        <input type="text"
+               placeholder="YYYY-MM-DD"
+               ng-model="newCommunication.date">
+        <select ng-model="newCommunication.type"
+                ng-options="key as label for (key, label) in metaData.entity.communication.types"
+                ></select>
+        <textarea placeholder="Notes"
+                  ng-model="newCommunication.notes"></textarea>
+        <button type="submit" ng-click="saveNewCommunication()">Save</button>
+        <button ng-click="cancelNewCommunication()">Cancel</button>
+    </div>
+    <div ng-repeat="communication in model.communications">
+        <button ng-click="deleteCommunication($index)">-</button>
+        <span>{{ communication.date }}</span>
+        <span>{{ communication.type }}</span>
+    </div>
 </div>

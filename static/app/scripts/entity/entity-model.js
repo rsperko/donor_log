@@ -73,7 +73,7 @@ angular.module('trackingApp')
                 phone = {
                 primary: ! self.phones.length,
                 number: '',
-                type: ''
+                type: 'M'
             };
             self.phones.push(phone);
             return phone;
@@ -93,7 +93,7 @@ angular.module('trackingApp')
                     line1: '',
                     line2: '',
                     city: '',
-                    state: '',
+                    state: 'WI',
                     postalCode: ''
                 };
             self.addresses.push(address);
