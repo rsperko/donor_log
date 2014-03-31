@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('trackingApp')
-    .factory('entityModel', ["$q", "$filter", "entityResource", "volunteerModel", function($q, $filter, resource, volunteerModel) {
+    .factory('entityModel', ["$q", "$filter", "entityResource", "volunteerModel",
+        function($q, $filter, resource, volunteerModel) {
 
         var Model = function(id, data) {
             var self = this;
@@ -52,18 +53,16 @@ angular.module('trackingApp')
 
         Model.prototype.save = function() {
             var self = this,
-                defer = $q.defer();
+                defer = $q.defer(),
+                action = (self.id) ? resource.update : resource.save;
 
-            var success = function (result) {
+            action(self).$promise.then(function(result) {
                 self.applyData(result);
                 defer.resolve(self);
-            };
-            if(self.id) {
-                resource.update(self, success);
-            }
-            else {
-                resource.save(self, success);
-            }
+            },
+            function(error) {
+                defer.reject(error);
+            });
 
             return defer.promise;
         };
@@ -159,6 +158,13 @@ angular.module('trackingApp')
             else {
                 return self.first_name + " " + self.last_name;
             }
+        };
+
+        Model.prototype.getPrimaryPhone = function() {
+            var result = _.find(this.phones, function(phone) {
+                return phone.primary;
+            });
+            return result ? result.number : '';
         };
 
         return Model;

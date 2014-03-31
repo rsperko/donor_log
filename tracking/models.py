@@ -98,7 +98,7 @@ class Communication(models.Model):
         TYPE_EMAIL: 'E-mail',
         TYPE_IN_PERSON: 'In-Person',
         TYPE_PHONE: 'Phone',
-        TYPE_OTHER: 'Other - see notes',
+        TYPE_OTHER: 'Other',
     }
     entity = models.ForeignKey(Entity, related_name='communications')
     date = models.DateField(default=datetime.date.today)
@@ -139,7 +139,7 @@ class Service(models.Model):
         TYPE_FOOD: 'Food',
         TYPE_FURNITURE: 'Furniture',
         TYPE_HOUSEHOLD_ITEM: 'Household Items',
-        TYPE_OTHER: 'Other - see notes'
+        TYPE_OTHER: 'Other'
     }
     client = models.ForeignKey(ClientInformation, related_name='services')
     date = models.DateField(default=datetime.date.today)
@@ -197,7 +197,7 @@ class DonorInformation(models.Model):
         CATEGORY_FOUNDATION: 'Foundation',
         CATEGORY_INDIVIDUAL: 'Individual',
         CATEGORY_NON_PROFIT: 'Non-Profit',
-        CATEGORY_OTHER: 'Other - see notes',
+        CATEGORY_OTHER: 'Other',
         CATEGORY_UNSET: 'Unset',
     }
     entity = models.ForeignKey(Entity,
@@ -225,7 +225,7 @@ class Donation(models.Model):
         TYPE_HOUSEHOLD_ITEM: 'Household Items',
         TYPE_MONEY: 'Money',
         TYPE_IN_KIND: 'In-Kind',
-        TYPE_OTHER: 'Other - see notes',
+        TYPE_OTHER: 'Other',
     }
     donor = models.ForeignKey(DonorInformation, related_name='donations')
     date = models.DateField(default=datetime.date.today)
@@ -263,7 +263,7 @@ class Skill(models.Model):
         TYPE_EVENTS: 'Events',
         TYPE_SORTING: 'Sorting',
         TYPE_WAREHOUSE: 'Warehouse',
-        TYPE_OTHER: 'Other - see notes',
+        TYPE_OTHER: 'Other',
         TYPE_SPEAKING: 'Public Speaking',
     }
     volunteer = models.ForeignKey(VolunteerInformation, related_name='skills')

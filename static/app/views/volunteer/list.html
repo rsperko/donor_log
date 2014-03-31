@@ -1,39 +1,64 @@
-<input type="text"
-       placeholder="First Name"
-       ng-model="criteria.first_name"/>
-<input type="text"
-       placeholder="Last Name"
-       ng-model="criteria.last_name"/>
-<input type="checkbox"
-       id="active"
-       ng-model="criteria.active"/>
-<label for="active">Active</label>
-<br>
-<input type="checkbox"
-       ng-repeat-start="(key, value) in metaData.volunteer.skill.types"
-       ng-model="skills[key]"
-       id="skill-{{ key }}">
-<label ng-repeat-end for="skill-{{ key }}">{{ value }}</label>
-<br>
-<button type="submit" ng-click="search()" class="btn btn-default">Search</button>
-<p>
-    <div ng-show="! results.length">
-        <span>No Results</span>
+<div name="volunteer-form" role="form">
+    <div class="row">
+        <div class="form-group col-md-4">
+            <label for="first_name">First Name</label>
+            <input type="text"
+                   id="first_name"
+                   class="form-control"
+                   placeholder="Search on First Name"
+                   ng-model="criteria.first_name"/>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="last_name">Last Name</label>
+            <input type="text"
+                   id="last_name"
+                   class="form-control"
+                   placeholder="Search Last Name"
+                   ng-model="criteria.last_name"/>
+        </div>
+        <div class="form-group col-md-4">
+            <label for="active">Active</label>
+            <input type="checkbox"
+                   id="active"
+                   ng-model="criteria.active"/>
+        </div>
     </div>
-    <div ng-show="results.length">
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>Name</th>
-                    <th>Active</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr ng-repeat="entity in results">
-                    <td><a href="#/volunteer/{{ entity.id }}">{{ entity.getName() }}</a></td>
-                    <td>{{ entity.volunteer_information[0].active }}</td>
-                </tr>
-            </tbody>
-        </table>
+    <div class="row">
+        <div class="col-md-2" ng-repeat="(key, value) in metaData.volunteer.skill.types">
+            <input type="checkbox"
+                   ng-model="skills[key]"
+                   id="skill-{{ key }}">
+            <label for="skill-{{ key }}">{{ value }}</label>
+        </div>
     </div>
-</p>
+    <div class="row">
+        <div class="col-md-2">
+            <button type="submit" ng-click="search()" class="btn btn-default form-control btn-primary">Search</button>
+        </div>
+    </div>
+    <div class="row">
+        <div ng-show="! results.length">
+            <span>No Results</span>
+        </div>
+        <div ng-show="results.length">
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Primary Phone</th>
+                        <th>email</th>
+                        <th>Active</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="entity in results">
+                        <td><a href="#/volunteer/{{ entity.id }}">{{ entity.getName() }}</a></td>
+                        <td>{{ entity.getPrimaryPhone() }}</td>
+                        <td>{{ entity.email }}</td>
+                        <td>{{ entity.volunteer_information[0].active }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

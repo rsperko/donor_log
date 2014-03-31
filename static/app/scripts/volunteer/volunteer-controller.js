@@ -1,8 +1,8 @@
 'use strict';
 
 angular.module('trackingApp')
-    .controller('volunteerCtrl', ["$scope", "$routeParams", "metaDataService", "entityModel",
-        function ($scope, $routeParams, metaData, model) {
+    .controller('volunteerCtrl', ["$scope", "$routeParams", "metaDataService", "entityModel", "alertService",
+        function ($scope, $routeParams, metaData, model, alert) {
         var self = this,
             id = $routeParams['id'],
 
@@ -40,7 +40,7 @@ angular.module('trackingApp')
                 }
             };
 
-        new EntityControllerMixin($scope).apply(self);
+        new EntityControllerMixin($scope, alert).apply(self);
 
         metaData.then(init);
     }]);
