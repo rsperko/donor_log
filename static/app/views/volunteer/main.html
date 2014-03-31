@@ -37,6 +37,7 @@
                     <input type="text"
                            class="form-control"
                            placeholder="414-444-4444"
+                           required
                            ng-model="phone.number">
                 </div>
             </div>
@@ -71,6 +72,7 @@
                            class="form-control"
                            id="address_line1"
                            placeholder="Enter line1"
+                           required
                            ng-model="address.line1">
                 </div>
             </div>
@@ -91,6 +93,7 @@
                            class="form-control"
                            id="city"
                            placeholder="Enter city"
+                           required
                            ng-model="address.city">
                 </div>
                 <div class="form-group col-md-4">
@@ -107,6 +110,7 @@
                            class="form-control"
                            id="postalCode"
                            placeholder="Enter postalCode"
+                           required
                            ng-model="address.postalCode">
                 </div>
             </div>
@@ -173,6 +177,11 @@
                 <button type="submit"
                         class="form-control bnt btn-primary"
                         ng-click="save()">Save</button>
+            </div>
+            <div class="col-md-4">
+                <button type="submit"
+                        class="form-control bnt"
+                        ng-click="saveAndNew()">Save and Add Another</button>
             </div>
         </div>
     </div>

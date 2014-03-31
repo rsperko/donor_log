@@ -1,17 +1,17 @@
 'use strict';
 
 angular.module('trackingApp')
-    .controller('volunteerCtrl', ["$scope", "$routeParams", "metaDataService", "entityModel", "alertService",
-        function ($scope, $routeParams, metaData, model, alert) {
+    .controller('volunteerCtrl', ["$scope", "$routeParams", "$q", "metaDataService", "entityModel", "alertService",
+        function ($scope, $routeParams, $q, metaData, model, alert) {
         var self = this,
             id = $routeParams['id'],
 
-            setupModels = function(metaData) {
+            setupModels = function() {
                 $scope.model.ensurePhone();
                 $scope.model.ensureAddress();
                 $scope.model.ensureVolunteerInformation();
                 $scope.skills = {};
-                _.each(metaData.volunteer.skill.types, function(value, key) {
+                _.each($scope.metaData.volunteer.skill.types, function(value, key) {
                     $scope.skills[key] = $scope.model.volunteer_information[0].hasSkill(key);
                 });
             },
@@ -19,6 +19,13 @@ angular.module('trackingApp')
             setupVolunteerActions = function() {
                 $scope.toggleSkill = function(skill) {
                     $scope.model.volunteer_information[0].toggleSkill(skill);
+                };
+
+                $scope.saveAndNew = function() {
+                    $scope.save().then(function(result) {
+                        $scope.model = model();
+                        setupModels();
+                    });
                 };
             },
 
@@ -32,15 +39,15 @@ angular.module('trackingApp')
 
                 if(id) {
                     $scope.model.load().then(function () {
-                        setupModels(metaData);
+                        setupModels();
                     });
                 }
                 else {
-                    setupModels(metaData);
+                    setupModels();
                 }
             };
 
-        new EntityControllerMixin($scope, alert).apply(self);
+        new EntityControllerMixin($scope, alert, $q).apply(self);
 
         metaData.then(init);
     }]);

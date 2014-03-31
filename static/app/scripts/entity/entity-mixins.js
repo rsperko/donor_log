@@ -1,16 +1,20 @@
 'use strict';
 
-function EntityControllerMixin($scope, alert) {
+function EntityControllerMixin($scope, alert, $q) {
     var self = this;
 
     self.setupEntityActions = function() {
         $scope.save = function() {
+            var defer = $q.defer();
             $scope.model.save().then(function(result) {
                 alert.add("success", "Saved successfully");
+                defer.resolve(result);
             },
             function(error) {
                 alert.add("danger", "Failed to save " + angular.toJson(error.data));
+                defer.reject(error);
             });
+            return defer.promise;
         };
 
         $scope.addPhone = function() {
