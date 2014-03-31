@@ -6,11 +6,11 @@ Questions
 
 Todo
 ====
-* create restful endpoints within entities
-* load page from search results
+* x create restful endpoints within entities
+* x load page from search results
 * move js into template html
-* enable security
-* layout with bootstrap
+* x enable security
+* x layout with bootstrap
 * flat-ui
 
 
