@@ -22,6 +22,7 @@ angular.module('trackingApp')
                 };
 
                 $scope.saveAndNew = function() {
+                    alert.clear();
                     $scope.save().then(function(result) {
                         $scope.model = model();
                         setupModels();
@@ -30,6 +31,8 @@ angular.module('trackingApp')
             },
 
             init = function(metaData) {
+                alert.clear();
+
                 $scope.metaData = metaData;
                 $scope.model = model(id);
 

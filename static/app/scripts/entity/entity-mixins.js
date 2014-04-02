@@ -5,6 +5,7 @@ function EntityControllerMixin($scope, alert, $q) {
 
     self.setupEntityActions = function() {
         $scope.save = function() {
+            alert.clear();
             var defer = $q.defer();
             $scope.model.save().then(function(result) {
                 alert.add("success", "Saved successfully");
@@ -39,6 +40,7 @@ function EntityControllerMixin($scope, alert, $q) {
         };
 
         $scope.saveNewCommunication = function() {
+            alert.clear();
             $scope.model.addCommunication($scope.newCommunication);
             $scope.newCommunication = null;
         };
@@ -48,6 +50,7 @@ function EntityControllerMixin($scope, alert, $q) {
         };
 
         $scope.deleteCommunication = function(communicationIndex) {
+            alert.clear();
             $scope.model.deleteCommunication($scope.model.communications[communicationIndex]);
         };
     };

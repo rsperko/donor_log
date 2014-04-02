@@ -2,189 +2,167 @@
     <h3>Volunteer Information</h3>
     <div class="col-md-9">
 
-    <div name="volunteer-form" role="form">
-        <div class="row">
-            <div class="form-group col-md-4">
-                <label for="first_name">First Name</label>
-                <input type="text"
-                       id="first_name"
-                       class="form-control"
-                       placeholder="Enter First Name"
-                       ng-model="model.first_name">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="last_name">Last Name</label>
-                <input type="text"
-                       class="form-control"
-                       id="last_name"
-                       placeholder="Enter Last Name"
-                       ng-model="model.last_name">
-            </div>
-            <div class="form-group col-md-4">
-                <label for="email">Email</label>
-                <input type="text"
-                       id="email"
-                       class="form-control"
-                       placeholder="Enter email"
-                       ng-model="model.email">
-            </div>
-        </div>
-        <div ng-repeat="phone in model.phones" class="row">
-            <div class="col-md-4">
-                <div class="input-group">
-                    <span ng-click="deletePhone($index)"
-                          class="glyphicon glyphicon-minus input-group-addon"></span>
-                    <input type="text"
-                           class="form-control"
-                           placeholder="414-444-4444"
-                           required
-                           ng-model="phone.number">
-                </div>
-            </div>
-            <div class="col-md-4">
-                <select ng-model="phone.type"
-                        class="form-control"
-                        ng-options="key as label for (key, label) in metaData.entity.phone.types"
-                        ></select>
-            </div>
-            <div class="col-md-2">
-                <div class="radio-inline">
-                    <label for="phone-primary-{{ $index }}">
-                    <input type="radio"
-                           id="phone-primary-{{ $index }}"
-                           ng-model="phone.primary"
-                           ng-value="true"
-                           ng-click="primaryPhone($index)">
-                        <span ng-show="phone.primary">Primary</span></label>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-2">
-                <button ng-click="addPhone()" class="form-control">Add</button>
-            </div>
-        </div>
-        <div ng-repeat="address in model.addresses">
+        <form name="volunteer-form" role="form">
             <div class="row">
-                <div class="form-group col-md-12">
-                    <label for="address_line1">Address Line 1</label>
+                <div form-group class="col-md-4" label="First Name">
                     <input type="text"
-                           class="form-control"
-                           id="address_line1"
-                           placeholder="Enter line1"
-                           required
-                           ng-model="address.line1">
+                           id="first_name"
+                           placeholder="Enter First Name"
+                           ng-model="model.first_name">
+                </div>
+                <div form-group class="col-md-4" label="Last Name">
+                    <input type="text"
+                           id="last_name"
+                           placeholder="Enter Last Name"
+                           ng-model="model.last_name">
+                </div>
+                <div form-group class="col-md-4" label="Email">
+                    <input type="text"
+                           id="email"
+                           placeholder="Enter email"
+                           ng-model="model.email">
                 </div>
             </div>
-            <div class="row">
-                <div class="form-group col-md-12">
-                    <label for="address_line2">Address Line 2</label>
-                    <input type="text"
-                           class="form-control"
-                           id="address_line2"
-                           placeholder="Enter line2"
-                           ng-model="address.line2">
+            <div ng-repeat="phone in model.phones" class="row">
+                <div class="col-md-4">
+                    <div class="input-group">
+                        <span ng-click="deletePhone($index)"
+                              class="glyphicon glyphicon-minus input-group-addon"></span>
+                        <input type="text"
+                               class="form-control"
+                               placeholder="414-444-4444"
+                               required
+                               ng-model="phone.number">
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="form-group col-md-4">
-                    <label for="city">City</label>
-                    <input type="text"
-                           class="form-control"
-                           id="city"
-                           placeholder="Enter city"
-                           required
-                           ng-model="address.city">
-                </div>
-                <div class="form-group col-md-4">
-                    <label for="state">State</label>
-                    <select ng-model="address.state"
+                <div class="col-md-4">
+                    <select ng-model="phone.type"
                             class="form-control"
-                            id="state"
-                            ng-options="key as label for (key, label) in metaData.entity.address.states"
+                            ng-options="key as label for (key, label) in metaData.entity.phone.types"
                             ></select>
                 </div>
-                <div class="form-group col-md-4">
-                    <label for="postalCode">Postal Code</label>
+                <div class="col-md-2">
+                    <div class="radio-inline">
+                        <label for="phone-primary-{{ $index }}">
+                        <input type="radio"
+                               id="phone-primary-{{ $index }}"
+                               ng-model="phone.primary"
+                               ng-value="true"
+                               ng-click="primaryPhone($index)">
+                            <span ng-show="phone.primary">Primary</span></label>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <button ng-click="addPhone()" class="form-control">Add</button>
+                </div>
+            </div>
+            <div ng-repeat="address in model.addresses">
+                <div class="row">
+                    <div form-group class="col-md-12" label="Address Line 1">
+                        <input type="text"
+                               id="address_line1"
+                               placeholder="Enter line1"
+                               required
+                               ng-model="address.line1">
+                    </div>
+                </div>
+                <div class="row">
+                    <div form-group class="col-md-12" label="Address Line 2">
+                        <input type="text"
+                               id="address_line2"
+                               placeholder="Enter line2"
+                               ng-model="address.line2">
+                    </div>
+                </div>
+                <div class="row">
+                    <div form-group class="col-md-4" label="City">
+                        <input type="text"
+                               id="city"
+                               placeholder="Enter city"
+                               required
+                               ng-model="address.city">
+                    </div>
+                    <div form-group class="col-md-4" label="State">
+                        <select ng-model="address.state"
+                                id="state"
+                                ng-options="key as label for (key, label) in metaData.entity.address.states"
+                                ></select>
+                    </div>
+                    <div form-group class="col-md-4" label="Postal Code">
+                        <input type="text"
+                               id="postalCode"
+                               placeholder="Enter postalCode"
+                               required
+                               ng-model="address.postalCode">
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div form-group class="col-md-12" label="Notes">
+                    <textarea id="notes"
+                            ng-model="model.notes"
+                            placeholder="Enter Notes"></textarea>
+                </div>
+            </div>
+
+            <hr>
+            <h4>Skills</h4>
+            <div class="row">
+                <div class="col-md-2" ng-repeat="(key, value) in metaData.volunteer.skill.types">
+                    <div class="checkbox-inline">
+                        <label for="skill-{{key}}">
+                            <input type="checkbox"
+                                   ng-model="skills[key]"
+                                   ng-change="toggleSkill(key)"
+                                   id="skill-{{ key }}">
+                            {{ value }}</label>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
+            <h4>Emergency Contact</h4>
+            <div class="row">
+                <div form-group class="col-md-6" label="Contact Name">
                     <input type="text"
-                           class="form-control"
-                           id="postalCode"
-                           placeholder="Enter postalCode"
-                           required
-                           ng-model="address.postalCode">
+                           id="contact-name"
+                           placeholder="Enter Contact Name"
+                           ng-model="model.volunteer_information[0].emergency_contact_name"/>
+                </div>
+                <div form-group class="col-md-6" label="Contact Number">
+                    <input type="text"
+                           id="contact-number"
+                           placeholder="Enter Contact Number"
+                           ng-model="model.volunteer_information[0].emergency_contact_number"/>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="form-group col-md-12">
-                <label for="notes">Notes</label>
-                <textarea class="form-control"
-                          id="notes"
-                        ng-model="model.notes"
-                        placeholder="Enter Notes"></textarea>
-            </div>
-        </div>
-
-        <hr>
-        <h4>Skills</h4>
-        <div class="row">
-            <div class="col-md-2" ng-repeat="(key, value) in metaData.volunteer.skill.types">
-                <div class="checkbox-inline">
-                    <label for="skill-{{key}}">
-                        <input type="checkbox"
-                               ng-model="skills[key]"
-                               ng-change="toggleSkill(key)"
-                               id="skill-{{ key }}">
-                        {{ value }}</label>
+            <hr>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="checkbox-inline">
+                        <label for="active">
+                            <input type="checkbox"
+                               id="active"
+                               ng-model="model.volunteer_information[0].active"/>
+                            Active</label>
+                    </div>
                 </div>
             </div>
-        </div>
-
-        <hr>
-        <h4>Emergency Contact</h4>
-        <div class="row">
-            <div class="col-md-6">
-                <label for="contact-name">Contact Name</label>
-                <input type="text"
-                       class="form-control"
-                       id="contact-name"
-                       placeholder="Enter Contact Name"
-                       ng-model="model.volunteer_information[0].emergency_contact_name"/>
-            </div>
-            <div class="col-md-6">
-                <label for="contact-number">Contact Number</label>
-                <input type="text"
-                       class="form-control"
-                       id="contact-number"
-                       placeholder="Enter Contact Number"
-                       ng-model="model.volunteer_information[0].emergency_contact_number"/>
-            </div>
-        </div>
-        <hr>
-        <div class="row">
-            <div class="col-md-4">
-                <div class="checkbox-inline">
-                    <label for="active">
-                        <input type="checkbox"
-                           id="active"
-                           ng-model="model.volunteer_information[0].active"/>
-                        Active</label>
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="submit"
+                            class="form-control bnt btn-primary"
+                            ng-click="save()">Save</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit"
+                            class="form-control bnt"
+                            ng-click="saveAndNew()">Save and Add Another</button>
                 </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="col-md-4">
-                <button type="submit"
-                        class="form-control bnt btn-primary"
-                        ng-click="save()">Save</button>
-            </div>
-            <div class="col-md-4">
-                <button type="submit"
-                        class="form-control bnt"
-                        ng-click="saveAndNew()">Save and Add Another</button>
-            </div>
-        </div>
-    </div>
+        </form>
     </div>
 
     <div class="col-md-3">
@@ -194,13 +172,11 @@
                 <button class="form-control"
                         ng-click="createCommunication()">Add Communication</button>
             </div>
-            <div name="communications-form" ng-show="newCommunication">
+            <form name="communications-form" ng-show="newCommunication">
                 <div class="row">
-                    <div class="col-md-8">
-                        <label for="communication-date">Date</label>
+                    <div form-control class="col-md-8" label="Date">
                         <input type="text"
                                id="communication-date"
-                               class="form-control"
                                placeholder="YYYY-MM-DD"
                                ng-model="newCommunication.date">
                     </div>
@@ -226,10 +202,8 @@
                         </div>
                 </div>
                 <div class="row">
-                    <div class="col-md-12">
-                        <label for="communication-notes">Notes</label>
-                        <textarea class="form-control"
-                                  id="communication-notes"
+                    <div form-control class="col-md-12" label="Notes">
+                        <textarea id="communication-notes"
                                   placeholder="Enter Contact Notes"
                                   ng-model="newCommunication.notes"></textarea>
                     </div>
@@ -242,7 +216,7 @@
                         <button class="form-control"  ng-click="cancelNewCommunication()">Cancel</button>
                     </div>
                 </div>
-            </div>
+            </form>
             <table class="table table-condensed">
                 <tbody>
                 <tr ng-repeat="communication in model.communications" ng-class="{success: communication.connected}">
@@ -253,13 +227,6 @@
                 </tr>
                 </tbody>
             </table>
-
-            <div class="row">
-                <div>
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
         </div>
     </div>
 </div>

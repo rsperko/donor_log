@@ -1,7 +1,8 @@
 'use strict';
 
 angular.module('trackingApp')
-    .controller('volunteerListCtrl', ["$scope", "metaDataService", "entityResource", "entityModel", function ($scope, metaData, resource, entityModel) {
+    .controller('volunteerListCtrl', ["$scope", "metaDataService", "entityResource", "entityModel", "alertService",
+        function ($scope, metaData, resource, entityModel, alert) {
         var self = this,
 
             setupModel = function(metaData) {
@@ -41,6 +42,8 @@ angular.module('trackingApp')
             },
 
             init = function(metaData) {
+                alert.clear();
+
                 $scope.metaData = metaData;
 
                 setupModel(metaData);
