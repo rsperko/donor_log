@@ -37,28 +37,30 @@
         </div>
     </div>
     <div class="row">
-        <div ng-show="! results.length">
-            <span>No Results</span>
-        </div>
-        <div ng-show="results.length">
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>Name</th>
-                        <th>Primary Phone</th>
-                        <th>email</th>
-                        <th>Active</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="entity in results">
-                        <td><a href="#/volunteer/{{ entity.id }}">{{ entity.getName() }}</a></td>
-                        <td>{{ entity.getPrimaryPhone() }}</td>
-                        <td>{{ entity.email }}</td>
-                        <td>{{ entity.volunteer_information[0].active }}</td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="col-md-12">
+            <div ng-show="! results.length">
+                <span>No Results</span>
+            </div>
+            <div ng-show="results.length">
+                <table class="table table-responsive">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Primary Phone</th>
+                            <th>email</th>
+                            <th>Active</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="entity in results">
+                            <td><a href="#/volunteer/{{ entity.id }}">{{ entity.getName() }}</a></td>
+                            <td>{{ entity.getPrimaryPhone() }}</td>
+                            <td>{{ entity.email }}</td>
+                            <td>{{ entity.volunteer_information[0].active }}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 </div>

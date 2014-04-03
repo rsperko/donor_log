@@ -31,7 +31,6 @@ angular.module('trackingApp')
                 }
 
                 scope.for = id;
-                scope.label = label;
 
                 var errorExpression = [formController.$name, name, "$invalid"].join(".");
                 // Watch the parent scope, because current scope is isolated.

@@ -1,5 +1,7 @@
 <div class="row">
-    <h3>Volunteer Information</h3>
+    <div class="col-md-9">
+        <h3>Volunteer Information</h3>
+    </div>
     <div class="col-md-9">
 
         <form name="volunteer-form" role="form">
@@ -8,12 +10,14 @@
                     <input type="text"
                            id="first_name"
                            placeholder="Enter First Name"
+                           required
                            ng-model="model.first_name">
                 </div>
                 <div form-group class="col-md-4" label="Last Name">
                     <input type="text"
                            id="last_name"
                            placeholder="Enter Last Name"
+                           required
                            ng-model="model.last_name">
                 </div>
                 <div form-group class="col-md-4" label="Email">
@@ -174,8 +178,9 @@
             </div>
             <form name="communications-form" ng-show="newCommunication">
                 <div class="row">
-                    <div form-control class="col-md-8" label="Date">
+                    <div form-group class="col-md-8" label="Date">
                         <input type="text"
+                               datepicker-popup="{{format}}"
                                id="communication-date"
                                placeholder="YYYY-MM-DD"
                                ng-model="newCommunication.date">
@@ -202,7 +207,7 @@
                         </div>
                 </div>
                 <div class="row">
-                    <div form-control class="col-md-12" label="Notes">
+                    <div form-group class="col-md-12" label="Notes">
                         <textarea id="communication-notes"
                                   placeholder="Enter Contact Notes"
                                   ng-model="newCommunication.notes"></textarea>

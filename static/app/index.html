@@ -19,25 +19,29 @@
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
   </head>
-  <body ng-app="trackingApp">
+  <body ng-app="trackingApp" class="container" >
     <!--[if lt IE 7]>
       <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
     <![endif]-->
 
     <!-- Add your site or application content here -->
     <div class="row">
-        <ul class="nav nav-pills">
-            <li><a href="#/volunteers">Search Volunteers</a></li>
-            <li><a href="#/volunteer/">New Volunteer</a></li>
-        </ul>
-    </div>
-
-    <div>
-        <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{ alert.msg }}</alert>
+        <div class="col-md-12">
+            <ul class="nav nav-pills">
+                <li><a href="#/volunteers">Search Volunteers</a></li>
+                <li><a href="#/volunteer/">New Volunteer</a></li>
+            </ul>
+        </div>
     </div>
 
     <div class="row">
-        <div class="container" ng-view=""></div>
+        <div class="col-md-12">
+            <alert ng-repeat="alert in alerts" type="alert.type" close="closeAlert($index)">{{ alert.msg }}</alert>
+        </div>
+    </div>
+
+    <div class="row">
+        <div ng-view=""></div>
     </div>
 
     <!-- Google Analytics: change UA-XXXXX-X to be your site's ID -->
