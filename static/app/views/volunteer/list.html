@@ -1,6 +1,6 @@
 <div name="volunteer-form" role="form">
     <div class="row">
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="first_name">First Name</label>
             <input type="text"
                    id="first_name"
@@ -8,7 +8,7 @@
                    placeholder="Search on First Name"
                    ng-model="criteria.first_name"/>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
             <label for="last_name">Last Name</label>
             <input type="text"
                    id="last_name"
@@ -16,7 +16,15 @@
                    placeholder="Search Last Name"
                    ng-model="criteria.last_name"/>
         </div>
-        <div class="form-group col-md-4">
+        <div class="form-group col-md-3">
+            <label for="notes">Notes</label>
+            <input type="text"
+                   id="notes"
+                   class="form-control"
+                   placeholder="Search Notes"
+                   ng-model="criteria.notes"/>
+        </div>
+        <div class="form-group col-md-3">
             <label for="active">Active</label>
             <input type="checkbox"
                    id="active"

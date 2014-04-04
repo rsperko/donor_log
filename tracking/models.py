@@ -254,10 +254,13 @@ class VolunteerInformation(models.Model):
 class Skill(models.Model):
     TYPE_DATA_ENTRY = 'D'
     TYPE_EVENTS = 'E'
+    TYPE_HANDYMAN = 'H'
+    TYPE_PICKUP = 'I'
+    TYPE_DELIVER = 'L'
+    TYPE_OTHER = 'O'
+    TYPE_SPEAKING = 'P'
     TYPE_SORTING = 'S'
     TYPE_WAREHOUSE = 'W'
-    TYPE_SPEAKING = 'P'
-    TYPE_OTHER = 'O'
     TYPES = {
         TYPE_DATA_ENTRY: 'Data Entry',
         TYPE_EVENTS: 'Events',
@@ -265,6 +268,9 @@ class Skill(models.Model):
         TYPE_WAREHOUSE: 'Warehouse',
         TYPE_OTHER: 'Other',
         TYPE_SPEAKING: 'Public Speaking',
+        TYPE_HANDYMAN: 'Handyman',
+        TYPE_PICKUP: 'Pickup',
+        TYPE_DELIVER: 'Deliver',
     }
     volunteer = models.ForeignKey(VolunteerInformation, related_name='skills')
     type = models.CharField(max_length=1,

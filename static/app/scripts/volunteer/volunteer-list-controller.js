@@ -11,7 +11,8 @@ angular.module('trackingApp')
           first_name: '',
           last_name: '',
           active: true,
-          skills: ''
+          skills: '',
+          notes: ''
         };
         $scope.results = [];
         _.each(metaData.volunteer.skill.types, function (value, key) {

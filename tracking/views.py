@@ -23,10 +23,11 @@ class EntityFilter(django_filters.FilterSet):
     last_name = django_filters.CharFilter(name='last_name', lookup_type='icontains')
     skills = django_filters.CharFilter(name='volunteer_information__skills__type', lookup_type='in')
     active = django_filters.BooleanFilter(name='volunteer_information__active', lookup_type='in')
+    notes = django_filters.CharFilter(name='notes', lookup_type='icontains')
 
     class Meta:
         model = Entity
-        fields = ['first_name', 'last_name', 'skills', 'active']
+        fields = ['first_name', 'last_name', 'skills', 'active', 'notes']
 
 
 class EntityViewSet(viewsets.ModelViewSet):
