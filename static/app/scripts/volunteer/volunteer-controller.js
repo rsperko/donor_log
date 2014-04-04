@@ -1,56 +1,58 @@
+/*global _:false */
+/*global EntityControllerMixin:false */
 'use strict';
 
 angular.module('trackingApp')
-    .controller('volunteerCtrl', ["$scope", "$routeParams", "$q", "metaDataService", "entityModel", "alertService",
-        function ($scope, $routeParams, $q, metaData, model, alert) {
-        var self = this,
-            id = $routeParams['id'],
+  .controller('volunteerCtrl', ['$scope', '$routeParams', '$q', 'metaDataService', 'entityModel', 'alertService',
+    function ($scope, $routeParams, $q, metaData, model, alert) {
+      var self = this,
+        id = $routeParams.id,
 
-            setupModels = function() {
-                $scope.model.ensurePhone();
-                $scope.model.ensureAddress();
-                $scope.model.ensureVolunteerInformation();
-                $scope.skills = {};
-                _.each($scope.metaData.volunteer.skill.types, function(value, key) {
-                    $scope.skills[key] = $scope.model.volunteer_information[0].hasSkill(key);
-                });
-            },
+        setupModels = function () {
+          $scope.model.ensurePhone();
+          $scope.model.ensureAddress();
+          $scope.model.ensureVolunteerInformation();
+          $scope.skills = {};
+          _.each($scope.metaData.volunteer.skill.types, function (value, key) {
+            $scope.skills[key] = $scope.model.volunteer_information[0].hasSkill(key);
+          });
+        },
 
-            setupVolunteerActions = function() {
-                $scope.toggleSkill = function(skill) {
-                    $scope.model.volunteer_information[0].toggleSkill(skill);
-                };
+        setupVolunteerActions = function () {
+          $scope.toggleSkill = function (skill) {
+            $scope.model.volunteer_information[0].toggleSkill(skill);
+          };
 
-                $scope.saveAndNew = function() {
-                    alert.clear();
-                    $scope.save().then(function(result) {
-                        $scope.model = model();
-                        setupModels();
-                    });
-                };
-            },
+          $scope.saveAndNew = function () {
+            alert.clear();
+            $scope.save().then(function () {
+              $scope.model = model();
+              setupModels();
+            });
+          };
+        },
 
-            init = function(metaData) {
-                alert.clear();
+        init = function (metaData) {
+          alert.clear();
 
-                $scope.metaData = metaData;
-                $scope.model = model(id);
+          $scope.metaData = metaData;
+          $scope.model = model(id);
 
-                self.setupEntityActions();
+          self.setupEntityActions();
 
-                setupVolunteerActions();
+          setupVolunteerActions();
 
-                if(id) {
-                    $scope.model.load().then(function () {
-                        setupModels();
-                    });
-                }
-                else {
-                    setupModels();
-                }
-            };
+          if (id) {
+            $scope.model.load().then(function () {
+              setupModels();
+            });
+          }
+          else {
+            setupModels();
+          }
+        };
 
-        new EntityControllerMixin($scope, alert, $q).apply(self);
+      new EntityControllerMixin($scope, alert, $q).apply(self);
 
-        metaData.then(init);
+      metaData.then(init);
     }]);

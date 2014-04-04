@@ -1,91 +1,92 @@
+/*global _:false */
 'use strict';
 
 angular.module('trackingApp')
-    .factory('volunteerModel', ["$q", "$filter", "volunteerResource", function($q, $filter, resource) {
+  .factory('volunteerModel', ['$q', '$filter', 'volunteerResource', function ($q, $filter, resource) {
 
-        var Model = function(id, data) {
-            var self = this;
-            if (self instanceof Model === false) {
-                self = new Model();
-            }
+    var Model = function (id, data) {
+      var self = this;
+      if (self instanceof Model === false) {
+        self = new Model();
+      }
 
-            self.id = id;
-            if(! data) {
-                data = {
-                    active: true,
-                    emergency_contact_name: '',
-                    emergency_contact_number: '',
-                    skills: []
-                };
-            }
-            self.applyData(data);
-
-            return self;
+      self.id = id;
+      if (!data) {
+        data = {
+          active: true,
+          emergency_contact_name: '',
+          emergency_contact_number: '',
+          skills: []
         };
+      }
+      self.applyData(data);
 
-        Model.prototype.load = function() {
-            var self = this,
-                defer = $q.defer();
+      return self;
+    };
 
-            resource.get({id: self.id}, function(result) {
-                self.applyData(result);
-                defer.resolve(self);
-            });
+    Model.prototype.load = function () {
+      var self = this,
+        defer = $q.defer();
 
-            return defer.promise;
-        };
+      resource.get({id: self.id}, function (result) {
+        self.applyData(result);
+        defer.resolve(self);
+      });
 
-        Model.prototype.applyData = function(data) {
-            var self = this;
-            _.extend(self, data);
-        };
+      return defer.promise;
+    };
 
-        Model.prototype.save = function() {
-            var self = this,
-                defer = $q.defer();
+    Model.prototype.applyData = function (data) {
+      var self = this;
+      _.extend(self, data);
+    };
 
-            var success = function (result) {
-                self.applyData(result);
-                defer.resolve(self);
-            };
-            if(self.id) {
-                resource.update(self, success);
-            }
-            else {
-                resource.save(self, success);
-            }
+    Model.prototype.save = function () {
+      var self = this,
+        defer = $q.defer();
 
-            return defer.promise;
-        };
+      var success = function (result) {
+        self.applyData(result);
+        defer.resolve(self);
+      };
+      if (self.id) {
+        resource.update(self, success);
+      }
+      else {
+        resource.save(self, success);
+      }
 
-        Model.prototype.ensureSkills = function() {
-            if(! this.skills) {
-                this.skills = [];
-            }
-        };
+      return defer.promise;
+    };
 
-        Model.prototype.hasSkill = function(skillCode) {
-            var self = this,
-                ret = _.findIndex(self.skills, function(skill) {
-                return skill.type === skillCode;
-            });
-            return ret !== -1;
-        };
+    Model.prototype.ensureSkills = function () {
+      if (!this.skills) {
+        this.skills = [];
+      }
+    };
 
-        Model.prototype.toggleSkill = function(skillCode) {
-            var self = this;
-            var index = _.findIndex(self.skills, function(skill) {
-                return skill.type === skillCode;
-            });
+    Model.prototype.hasSkill = function (skillCode) {
+      var self = this,
+        ret = _.findIndex(self.skills, function (skill) {
+          return skill.type === skillCode;
+        });
+      return ret !== -1;
+    };
 
-            if(index >= 0) {
-                self.skills.splice(index, 1);
-            }
-            else {
-                self.skills.push({ type: skillCode });
-            }
-        };
+    Model.prototype.toggleSkill = function (skillCode) {
+      var self = this;
+      var index = _.findIndex(self.skills, function (skill) {
+        return skill.type === skillCode;
+      });
+
+      if (index >= 0) {
+        self.skills.splice(index, 1);
+      }
+      else {
+        self.skills.push({ type: skillCode });
+      }
+    };
 
 
-        return Model;
-    }]);
+    return Model;
+  }]);

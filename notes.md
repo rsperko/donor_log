@@ -22,3 +22,5 @@ Learning
 * use bower to add lodash
   * $ bower install lodash
   * add to index.html
+npm install karma-chrome-launcher --save-dev
+npm install karma-jasmine
