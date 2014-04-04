@@ -1,4 +1,3 @@
-/*global _:false */
 'use strict';
 
 function EntityControllerMixin($scope, alert, $q) {

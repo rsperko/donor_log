@@ -1,4 +1,3 @@
-/*global _:false */
 /*global EntityControllerMixin:false */
 'use strict';
 
