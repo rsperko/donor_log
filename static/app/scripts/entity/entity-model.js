@@ -83,6 +83,12 @@ angular.module('trackingApp')
         }
       };
 
+      Model.prototype.primaryPhone = function(phoneIndex) {
+        _.each(this.phones, function (phone, index) {
+          phone.primary = index === phoneIndex;
+        });
+      };
+
       Model.prototype.newAddress = function () {
         var self = this,
           address = {

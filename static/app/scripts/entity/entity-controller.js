@@ -31,9 +31,7 @@ angular.module('trackingApp')
       };
 
       $scope.primaryPhone = function (phoneIndex) {
-        _.each($scope.model.phones, function (phone, index) {
-          phone.primary = index === phoneIndex;
-        });
+        $scope.model.primaryPhone(phoneIndex);
       };
 
       $scope.createCommunication = function () {
