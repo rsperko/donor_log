@@ -1,10 +1,8 @@
-/*global EntityControllerMixin:false */
 'use strict';
 
 angular.module('trackingApp')
-  .controller('volunteerCtrl', ['$scope', '$routeParams', '$q', 'metaDataService', 'entityModel', 'alertService',
-    function ($scope, $routeParams, $q, metaData, model, alert) {
-      var self = this,
+  .controller('VolunteerCtrl', function ($scope, $routeParams, $q, $controller, metaDataService, entityModel, alertService) {
+      var entityCtrl = $controller('EntityCtrl', {$scope: $scope, alertService: alertService, $q: $q}),
         id = $routeParams.id,
 
         setupModels = function () {
@@ -23,21 +21,21 @@ angular.module('trackingApp')
           };
 
           $scope.saveAndNew = function () {
-            alert.clear();
+            alertService.clear();
             $scope.save().then(function () {
-              $scope.model = model();
+              $scope.model = entityModel();
               setupModels();
             });
           };
         },
 
         init = function (metaData) {
-          alert.clear();
+          alertService.clear();
 
           $scope.metaData = metaData;
-          $scope.model = model(id);
+          $scope.model = entityModel(id);
 
-          self.setupEntityActions();
+          entityCtrl.setupEntityActions();
 
           setupVolunteerActions();
 
@@ -51,7 +49,5 @@ angular.module('trackingApp')
           }
         };
 
-      new EntityControllerMixin($scope, alert, $q).apply(self);
-
-      metaData.then(init);
-    }]);
+      metaDataService.then(init);
+    });

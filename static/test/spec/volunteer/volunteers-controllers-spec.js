@@ -1,22 +1,26 @@
 'use strict';
 
-//describe('Controller: MainCtrl', function () {
-//
+describe('Controller: volunteerListCtrl', function () {
+
 //  // load the controller's module
-//  beforeEach(module('staticApp'));
+//  beforeEach(module('trackingApp'));
 //
-//  var MainCtrl,
+//  var volunteerListCtrl,
 //    scope;
 //
 //  // Initialize the controller and a mock scope
 //  beforeEach(inject(function ($controller, $rootScope) {
 //    scope = $rootScope.$new();
-//    MainCtrl = $controller('MainCtrl', {
-//      $scope: scope
+//    volunteerListCtrl = $controller('volunteerListCtrl', {
+//      '$scope', 'metaDataService', 'entityResource', 'entityModel', 'alertService'
 //    });
 //  }));
 //
 //  it('should attach a list of awesomeThings to the scope', function () {
 //    expect(scope.awesomeThings.length).toBe(3);
 //  });
-//});
+
+
+
+
+});

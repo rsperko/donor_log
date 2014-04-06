@@ -1,26 +1,25 @@
 'use strict';
 
 angular.module('trackingApp')
-  .controller('volunteerListCtrl', ['$scope', 'metaDataService', 'entityResource', 'entityModel', 'alertService',
-    function ($scope, metaData, resource, entityModel, alert) {
+  .controller('VolunteerListCtrl', function ($scope, metaDataService, entityResource, entityModel, alertService) {
 
       var setupModel = function (metaData) {
-        $scope.skills = {};
-        $scope.criteria = {
-          first_name: '',
-          last_name: '',
-          active: true,
-          skills: '',
-          notes: ''
-        };
-        $scope.results = [];
-        _.each(metaData.volunteer.skill.types, function (value, key) {
-          $scope.skills[key] = false;
-        });
-      },
+          $scope.skills = {};
+          $scope.criteria = {
+            first_name: '',
+            last_name: '',
+            active: true,
+            skills: '',
+            notes: ''
+          };
+          $scope.results = [];
+          _.each(metaData.volunteer.skill.types, function (value, key) {
+            $scope.skills[key] = false;
+          });
+        },
 
         setupActions = function () {
-          $scope.search = function () {
+          function _buildSubmit() {
             var submit = _.extend({}, $scope.criteria);
             submit.active = (submit.active) ? 'True' : 'False';
 
@@ -33,7 +32,12 @@ angular.module('trackingApp')
               }
             });
             submit.skills = selectedSkills.join();
-            resource.query(submit).$promise.then(function (result) {
+          }
+
+          $scope.search = function () {
+            var submit = _buildSubmit();
+
+            entityResource.query(submit).$promise.then(function (result) {
               _.each(result, function (entity) {
                 $scope.results.push(entityModel(entity.id, entity));
               });
@@ -42,7 +46,7 @@ angular.module('trackingApp')
         },
 
         init = function (metaData) {
-          alert.clear();
+          alertService.clear();
 
           $scope.metaData = metaData;
 
@@ -51,5 +55,5 @@ angular.module('trackingApp')
           setupActions();
         };
 
-      metaData.then(init);
-    }]);
+      metaDataService.then(init);
+    });

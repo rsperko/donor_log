@@ -1,8 +1,7 @@
 'use strict';
 
 angular.module('trackingApp')
-  .factory('entityModel', ['$q', '$filter', 'entityResource', 'volunteerModel',
-    function ($q, $filter, resource, volunteerModel) {
+  .factory('entityModel', function ($q, $filter, entityResource, volunteerModel) {
 
       var Model = function (id, data) {
         var self = this;
@@ -34,7 +33,7 @@ angular.module('trackingApp')
         var self = this,
           defer = $q.defer();
 
-        resource.get({id: self.id}, function (result) {
+        entityResource.get({id: self.id}, function (result) {
           self.applyData(result);
           defer.resolve(self);
         });
@@ -54,7 +53,7 @@ angular.module('trackingApp')
       Model.prototype.save = function () {
         var self = this,
           defer = $q.defer(),
-          action = (self.id) ? resource.update : resource.save;
+          action = (self.id) ? entityResource.update : entityResource.save;
 
         action(self).$promise.then(function (result) {
             self.applyData(result);
@@ -125,7 +124,7 @@ angular.module('trackingApp')
           self.applyData(result);
           defer.resolve(self);
         };
-        resource.addCommunication(communication, success);
+        entityResource.addCommunication(communication, success);
 
         return defer.promise;
       };
@@ -138,7 +137,7 @@ angular.module('trackingApp')
           self.applyData(result);
           defer.resolve(self);
         };
-        resource.deleteCommunication({id: self.id, comm_id: communication.id}, success);
+        entityResource.deleteCommunication({id: self.id, comm_id: communication.id}, success);
 
         return defer.promise;
       };
@@ -168,4 +167,4 @@ angular.module('trackingApp')
       };
 
       return Model;
-    }]);
+    });

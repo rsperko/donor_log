@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trackingApp')
-  .factory('volunteerModel', ['$q', '$filter', 'volunteerResource', function ($q, $filter, resource) {
+  .factory('volunteerModel', function ($q, $filter, volunteerResource) {
 
     var Model = function (id, data) {
       var self = this;
@@ -27,7 +27,7 @@ angular.module('trackingApp')
       var self = this,
         defer = $q.defer();
 
-      resource.get({id: self.id}, function (result) {
+      volunteerResource.get({id: self.id}, function (result) {
         self.applyData(result);
         defer.resolve(self);
       });
@@ -49,10 +49,10 @@ angular.module('trackingApp')
         defer.resolve(self);
       };
       if (self.id) {
-        resource.update(self, success);
+        volunteerResource.update(self, success);
       }
       else {
-        resource.save(self, success);
+        volunteerResource.save(self, success);
       }
 
       return defer.promise;
@@ -88,4 +88,4 @@ angular.module('trackingApp')
 
 
     return Model;
-  }]);
+  });

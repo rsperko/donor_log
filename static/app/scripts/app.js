@@ -4,8 +4,7 @@ angular.module('trackingApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute',
-  'ui.bootstrap'
+  'ngRoute'
 ])
   .config(function ($httpProvider, $routeProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
@@ -18,11 +17,11 @@ angular.module('trackingApp', [
       })
       .when('/volunteer/:id?', {
         templateUrl: 'views/volunteer/main.html',
-        controller: 'volunteerCtrl'
+        controller: 'VolunteerCtrl'
       })
       .when('/volunteers', {
         templateUrl: 'views/volunteer/list.html',
-        controller: 'volunteerListCtrl'
+        controller: 'VolunteerListCtrl'
       })
       .otherwise({
         redirectTo: '/'

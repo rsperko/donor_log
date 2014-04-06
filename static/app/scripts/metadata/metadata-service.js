@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trackingApp')
-  .factory('metaDataService', ['$http', '$q', function ($http, $q) {
+  .factory('metaDataService', function ($http, $q) {
 //        var load = function() {
     var defer = $q.defer();
 
@@ -12,4 +12,4 @@ angular.module('trackingApp')
     return defer.promise;
 //        };
 //        return load();
-  }]);
+  });

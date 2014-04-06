@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trackingApp')
-  .factory('entityResource', ['resourceFactory', function (resourceFactory) {
+  .factory('entityResource', function (resourceFactory) {
     var service = resourceFactory('/api/entities/:entity/:id/:action',
       {
         id: '@id',
@@ -11,4 +11,4 @@ angular.module('trackingApp')
         'deleteCommunication': {method: 'DELETE', params: { action: 'communications' }}
       });
     return service;
-  }]);
+  });

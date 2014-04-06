@@ -1,15 +1,15 @@
 'use strict';
 
 angular.module('trackingApp')
-  .factory('volunteerResource', ['resourceFactory', function (resourceFactory) {
+  .factory('volunteerResource', function (resourceFactory) {
     var service = resourceFactory('/api/volunteers/:id/:action',
       {
         id: '@id'
       }, {
       });
     return service;
-  }])
-  .factory('volunteerService', ['volunteerModel', '$http', '$q', function (volunteerModel, $http, $q) {
+  })
+  .factory('volunteerService', function (volunteerModel, $http, $q) {
     var load = function () {
       var defer = $q.defer();
 
@@ -27,4 +27,4 @@ angular.module('trackingApp')
       return defer.promise;
     };
     return load;
-  }]);
+  });
