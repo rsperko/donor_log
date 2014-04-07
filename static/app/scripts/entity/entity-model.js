@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trackingApp')
-  .factory('entityModel', function ($q, $filter, entityResource, volunteerModel) {
+  .factory('entityModel', function ($q, $filter, entityResource, communicationResource, volunteerModel) {
 
       var Model = function (id, data) {
         var self = this;
@@ -122,15 +122,29 @@ angular.module('trackingApp')
         return communication;
       };
 
-      Model.prototype.addCommunication = function (communication) {
+      Model.prototype.saveCommunication = function (communication) {
         var self = this,
-          defer = $q.defer();
+          defer = $q.defer(),
+          action = (communication.id) ? communicationResource.update : communicationResource.save;
 
-        var success = function (result) {
-          self.applyData(result);
-          defer.resolve(self);
-        };
-        entityResource.addCommunication(communication, success);
+        communication.entity = self.id;
+
+        action(communication).$promise.then(function (result) {
+            if(communication.id) {
+              for(var i = 0; i < self.communications.length; i++) {
+                if(self.communications[i].id === communication.id) {
+                  self.communications[i] = result;
+                }
+              }
+            }
+            else {
+              self.communications.push(result);
+            }
+            defer.resolve(self);
+          },
+          function (error) {
+            defer.reject(error);
+          });
 
         return defer.promise;
       };
@@ -139,11 +153,14 @@ angular.module('trackingApp')
         var self = this,
           defer = $q.defer();
 
-        var success = function (result) {
-          self.applyData(result);
+        var success = function () {
+          _.remove(self.communications, function(comm) {
+            return comm.id === communication.id;
+          });
+
           defer.resolve(self);
         };
-        entityResource.deleteCommunication({id: self.id, comm_id: communication.id}, success);
+        communicationResource.delete(communication, success);
 
         return defer.promise;
       };

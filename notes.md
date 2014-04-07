@@ -11,7 +11,6 @@ Todo
 * move js into template html
 * x enable security
 * x layout with bootstrap
-* flat-ui
 
 
 Learning

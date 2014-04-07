@@ -1,5 +1,5 @@
 'use strict';
-//
+
 angular.module('trackingApp')
   .controller('EntityCtrl', function ($scope, alertService, $q) {
     var self = this;
@@ -35,22 +35,26 @@ angular.module('trackingApp')
       };
 
       $scope.createCommunication = function () {
-        $scope.newCommunication = $scope.model.createCommunication();
+        $scope.currentCommunication = $scope.model.createCommunication();
       };
 
-      $scope.saveNewCommunication = function () {
+      $scope.saveCommunication = function () {
         alertService.clear();
-        $scope.model.addCommunication($scope.newCommunication);
-        $scope.newCommunication = null;
+        $scope.model.saveCommunication($scope.currentCommunication);
+        $scope.currentCommunication = null;
       };
 
-      $scope.cancelNewCommunication = function () {
-        $scope.newCommunication = null;
+      $scope.cancelCommunication = function () {
+        $scope.currentCommunication = null;
       };
 
       $scope.deleteCommunication = function (communicationIndex) {
         alertService.clear();
         $scope.model.deleteCommunication($scope.model.communications[communicationIndex]);
+      };
+
+      $scope.editCommunication = function (communicationIndex) {
+        $scope.currentCommunication = _.extend({}, $scope.model.communications[communicationIndex]);
       };
     };
   });

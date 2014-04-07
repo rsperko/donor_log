@@ -8,13 +8,8 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .models import Entity, \
-    ClientInformation, \
-    DonorInformation, \
-    VolunteerInformation, Communication
+    Communication
 from .serializers import EntitySerializer, \
-    ClientInformationSerializer, \
-    DonorInformationSerializer, \
-    VolunteerInformationSerializer, \
     CommunicationSerializer
 
 
@@ -80,16 +75,6 @@ class EntityViewSet(viewsets.ModelViewSet):
             return self.__update_communication(comm_serializer)
 
 
-class ClientInformationViewSet(viewsets.ModelViewSet):
-    queryset = ClientInformation.objects.all()
-    serializer_class = ClientInformationSerializer
-
-
-class DonorInformationViewSet(viewsets.ModelViewSet):
-    queryset = DonorInformation.objects.all()
-    serializer_class = DonorInformationSerializer
-
-
-class VolunteerInformationViewSet(viewsets.ModelViewSet):
-    queryset = VolunteerInformation.objects.all()
-    serializer_class = VolunteerInformationSerializer
+class CommunicationViewSet(viewsets.ModelViewSet):
+    queryset = Communication.objects.all()
+    serializer_class = CommunicationSerializer

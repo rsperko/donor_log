@@ -8,17 +8,13 @@ admin.autodiscover()
 from rest_framework import routers
 
 from tracking.views import EntityViewSet, \
-    ClientInformationViewSet, \
-    DonorInformationViewSet, \
-    VolunteerInformationViewSet
+    CommunicationViewSet
 from meta_data.views import MetaDataViewSet
 
 # Routers provide an easy way of automatically determining the URL conf.
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'entities', EntityViewSet)
-router.register(r'donors', DonorInformationViewSet)
-router.register(r'clients', ClientInformationViewSet)
-router.register(r'volunteers', VolunteerInformationViewSet)
+router.register(r'communications', CommunicationViewSet)
 
 urlpatterns = patterns('',
     # Examples:

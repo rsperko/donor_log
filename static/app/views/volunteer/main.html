@@ -172,25 +172,25 @@
     <div class="col-md-3">
         <div name="communications" ng-show="model.id">
             <h4>Communications</h4>
-            <div class="row" ng-hide="newCommunication">
+            <div class="row" ng-hide="currentCommunication">
                 <button class="form-control"
                         ng-click="createCommunication()">Add Communication</button>
             </div>
-            <form name="communications-form" ng-show="newCommunication">
+            <form name="communications-form" ng-show="currentCommunication">
                 <div class="row">
                     <div form-group class="col-md-8" label="Date">
                         <input type="text"
                                datepicker-popup="{{format}}"
                                id="communication-date"
                                placeholder="YYYY-MM-DD"
-                               ng-model="newCommunication.date">
+                               ng-model="currentCommunication.date">
                     </div>
                     <div class="col-md-4">
                         <div class="checkbox-inline">
                             <label for="connected">
                                 <input type="checkbox"
                                        id="connected"
-                                       ng-model="newCommunication.connected">
+                                       ng-model="currentCommunication.connected">
                                 Connected
                             </label>
                         </div>
@@ -199,7 +199,7 @@
                 <div class="row">
                     <div class="col-md-8">
                         <label for="communication-type">Type</label>
-                        <select ng-model="newCommunication.type"
+                        <select ng-model="currentCommunication.type"
                                 id="communication-type"
                                 class="form-control"
                                 ng-options="key as label for (key, label) in metaData.entity.communication.types"
@@ -210,15 +210,15 @@
                     <div form-group class="col-md-12" label="Notes">
                         <textarea id="communication-notes"
                                   placeholder="Enter Contact Notes"
-                                  ng-model="newCommunication.notes"></textarea>
+                                  ng-model="currentCommunication.notes"></textarea>
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-md-6">
-                        <button class="form-control" type="submit" ng-click="saveNewCommunication()">Save</button>
+                        <button class="form-control" type="submit" ng-click="saveCommunication()">Save</button>
                     </div>
                     <div class="col-md-6">
-                        <button class="form-control"  ng-click="cancelNewCommunication()">Cancel</button>
+                        <button class="form-control"  ng-click="cancelCommunication()">Cancel</button>
                     </div>
                 </div>
             </form>
@@ -226,9 +226,12 @@
                 <tbody>
                 <tr ng-repeat="communication in model.communications" ng-class="{success: communication.connected}">
                     <td><span ng-click="deleteCommunication($index)"
-                              class="glyphicon glyphicon-minus"></span>
-                    <td>{{ communication.date }}</td>
+                              class="glyphicon glyphicon-minus"></span></td>
+                    <td><span ng-click="editCommunication($index)"
+                              class="glyphicon glyphicon-pencil"></span></td>
+                    <td>{{ communication.date | date : 'MM/dd/yy' }}</td>
                     <td>{{ metaData.entity.communication.types[communication.type] }}</td>
+                    <td><span class="overflow">{{ communication.notes }}</span></td>
                 </tr>
                 </tbody>
             </table>

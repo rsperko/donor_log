@@ -89,3 +89,8 @@ body {
         border-bottom: 0;
     }
 }
+
+.overflow {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
