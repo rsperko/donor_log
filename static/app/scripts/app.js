@@ -4,7 +4,8 @@ angular.module('trackingApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
-  'ngRoute'
+  'ngRoute',
+  'ui.bootstrap'
 ])
   .config(function ($httpProvider, $routeProvider) {
     $httpProvider.defaults.xsrfCookieName = 'csrftoken';
