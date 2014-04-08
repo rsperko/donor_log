@@ -178,12 +178,14 @@
             </div>
             <form name="communications-form" ng-show="currentCommunication">
                 <div class="row">
-                    <div class="col-md-8" label="Date">
+                    <div class="col-md-8">
                         <p class="input-group">
                             <input type="text"
                                    class="form-control"
                                    datepicker-popup="yyyy-MM-dd"
                                    ng-model="currentCommunication.date"
+                                   id="communication-date"
+                                   name="communication-date"
                                    is-open="commDateOpened"
                                    ng-required="true"/>
                             <span class="input-group-btn">
