@@ -8,7 +8,6 @@ angular.module('trackingApp')
           $scope.criteria = {
             first_name: '',
             last_name: '',
-            active: true,
             skills: '',
             notes: ''
           };
@@ -21,7 +20,6 @@ angular.module('trackingApp')
         setupActions = function () {
           function _buildSubmit() {
             var submit = _.extend({}, $scope.criteria);
-            submit.active = (submit.active) ? 'True' : 'False';
 
             $scope.results = [];
 

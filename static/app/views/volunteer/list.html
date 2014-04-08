@@ -24,11 +24,15 @@
                    placeholder="Search Notes"
                    ng-model="criteria.notes"/>
         </div>
-        <div class="form-group col-md-3">
+        <div class="form-group col-md-1">
             <label for="active">Active</label>
-            <input type="checkbox"
-                   id="active"
-                   ng-model="criteria.active"/>
+            <select id="active"
+                    class="form-control"
+                    ng-model="criteria.active">
+                <option value="" selected></option>
+                <option value="True">Yes</option>
+                <option value="False">No</option>
+                    </select>
         </div>
     </div>
     <div class="row">
@@ -57,14 +61,16 @@
                             <th>Primary Phone</th>
                             <th>email</th>
                             <th>Active</th>
+                            <th>Notes</th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr ng-repeat="entity in results">
-                            <td><a href="#/volunteer/{{ entity.id }}">{{ entity.getName() }}</a></td>
-                            <td>{{ entity.getPrimaryPhone() }}</td>
-                            <td>{{ entity.email }}</td>
-                            <td>{{ entity.volunteer_information[0].active }}</td>
+                            <td class="col-md-2"><a href="#/volunteer/{{ entity.id }}">{{ entity.getName() }}</a></td>
+                            <td class="col-md-2">{{ entity.getPrimaryPhone() }}</td>
+                            <td class="col-md-2">{{ entity.email }}</td>
+                            <td class="col-md-1">{{ entity.volunteer_information[0].active }}</td>
+                            <td class="col-md-5 overflow" style="max-width: 200px">{{ entity.notes }}</td>
                         </tr>
                     </tbody>
                 </table>
