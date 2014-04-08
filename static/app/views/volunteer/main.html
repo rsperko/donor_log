@@ -222,19 +222,23 @@
                     </div>
                 </div>
             </form>
-            <table class="table table-condensed">
-                <tbody>
-                <tr ng-repeat="communication in model.communications" ng-class="{success: communication.connected}">
-                    <td><span ng-click="deleteCommunication($index)"
-                              class="glyphicon glyphicon-minus"></span></td>
-                    <td><span ng-click="editCommunication($index)"
-                              class="glyphicon glyphicon-pencil"></span></td>
-                    <td>{{ communication.date | date : 'MM/dd/yy' }}</td>
-                    <td>{{ metaData.entity.communication.types[communication.type] }}</td>
-                    <td><span class="overflow">{{ communication.notes }}</span></td>
-                </tr>
-                </tbody>
-            </table>
+            <div class="row">
+                <div class="col-md-12">
+                    <table class="table table-condensed">
+                        <tbody>
+                        <tr ng-repeat="communication in model.communications" ng-class="{success: communication.connected}">
+                            <td><span ng-click="deleteCommunication($index)"
+                                      class="glyphicon glyphicon-minus"></span></td>
+                            <td><span ng-click="editCommunication($index)"
+                                      class="glyphicon glyphicon-pencil"></span></td>
+                            <td>{{ communication.date | date : 'MM/dd/yy' }}</td>
+                            <td>{{ metaData.entity.communication.types[communication.type] }}</td>
+                            <td class="overflow" style="max-width: 110px">{{ communication.notes }}</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 </div>
