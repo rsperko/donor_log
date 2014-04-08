@@ -32,6 +32,7 @@ angular.module('trackingApp')
               }
             });
             submit.skills = selectedSkills.join();
+            return submit;
           }
 
           $scope.search = function () {
