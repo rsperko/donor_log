@@ -27,6 +27,13 @@ angular.module('trackingApp')
               setupModels();
             });
           };
+
+          $scope.commDateOpen = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.commDateOpened = true;
+          };
         },
 
         init = function (metaData) {
