@@ -1,0 +1,78 @@
+<div name="communications" ng-show="model.id">
+    <h4>Communications</h4>
+    <div class="row" ng-hide="currentCommunication">
+        <button class="form-control"
+                ng-click="createCommunication()">Add Communication</button>
+    </div>
+    <form name="communications-form" ng-show="currentCommunication">
+        <div class="row">
+            <div class="col-md-8">
+                <p class="input-group">
+                    <input type="text"
+                           class="form-control"
+                           datepicker-popup="yyyy-MM-dd"
+                           ng-model="currentCommunication.date"
+                           id="communication-date"
+                           name="communication-date"
+                           is-open="commDateOpened"
+                           ng-required="true"/>
+                            <span class="input-group-btn">
+                                <button class="btn btn-default" ng-click="commDateOpen($event)"><i class="glyphicon glyphicon-calendar"></i></button>
+                            </span>
+                </p>
+            </div>
+            <div class="col-md-4">
+                <div class="checkbox-inline">
+                    <label for="connected">
+                        <input type="checkbox"
+                               id="connected"
+                               ng-model="currentCommunication.connected">
+                        Connected
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-8">
+                <label for="communication-type">Type</label>
+                <select ng-model="currentCommunication.type"
+                        id="communication-type"
+                        class="form-control"
+                        ng-options="key as label for (key, label) in metaData.entity.communication.types"
+                        ></select>
+            </div>
+        </div>
+        <div class="row">
+            <div form-group class="col-md-12" label="Notes">
+                <textarea id="communication-notes"
+                          placeholder="Enter Contact Notes"
+                          ng-model="currentCommunication.notes"></textarea>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <button class="form-control" type="submit" ng-click="saveCommunication()">Save</button>
+            </div>
+            <div class="col-md-6">
+                <button class="form-control"  ng-click="cancelCommunication()">Cancel</button>
+            </div>
+        </div>
+    </form>
+    <div class="row">
+        <div class="col-md-12">
+            <table class="table table-condensed">
+                <tbody>
+                <tr ng-repeat="communication in model.communications" ng-class="{success: communication.connected}">
+                    <td><span ng-click="deleteCommunication($index)"
+                              class="glyphicon glyphicon-minus"></span></td>
+                    <td><span ng-click="editCommunication($index)"
+                              class="glyphicon glyphicon-pencil"></span></td>
+                    <td>{{ communication.date | date : 'MM/dd/yy' }}</td>
+                    <td>{{ metaData.entity.communication.types[communication.type] }}</td>
+                    <td class="overflow" style="max-width: 110px">{{ communication.notes }}</td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

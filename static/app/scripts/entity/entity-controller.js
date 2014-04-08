@@ -56,5 +56,12 @@ angular.module('trackingApp')
       $scope.editCommunication = function (communicationIndex) {
         $scope.currentCommunication = _.extend({}, $scope.model.communications[communicationIndex]);
       };
+
+      $scope.commDateOpen = function($event) {
+        $event.preventDefault();
+        $event.stopPropagation();
+
+        $scope.commDateOpened = true;
+      };
     };
   });

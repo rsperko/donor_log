@@ -1,0 +1,30 @@
+<div class="row">
+    <div class="col-md-9">
+        <h3>Donor Information</h3>
+    </div>
+    <div class="col-md-9">
+
+        <form name="donor-form" role="form">
+            <ng-include src="'views/entity/entity_main.html'"></ng-include>
+
+            <hr>
+            <h4>Donations</h4>
+            <div class="row">
+                <div class="col-md-4">
+                    <button type="submit"
+                            class="form-control bnt btn-primary"
+                            ng-click="save()">Save</button>
+                </div>
+                <div class="col-md-4">
+                    <button type="submit"
+                            class="form-control bnt"
+                            ng-click="saveAndNew()">Save and Add Another</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div class="col-md-3">
+        <ng-include src="'views/entity/entity_communications.html'"></ng-include>
+    </div>
+</div>

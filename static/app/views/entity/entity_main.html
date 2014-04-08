@@ -1,0 +1,105 @@
+<div class="row">
+    <div form-group class="col-md-4" label="First Name">
+        <input type="text"
+               id="first_name"
+               placeholder="Enter First Name"
+               required
+               ng-model="model.first_name">
+    </div>
+    <div form-group class="col-md-4" label="Last Name">
+        <input type="text"
+               id="last_name"
+               placeholder="Enter Last Name"
+               required
+               ng-model="model.last_name">
+    </div>
+    <div form-group class="col-md-4" label="Email">
+        <input type="text"
+               id="email"
+               placeholder="Enter email"
+               ng-model="model.email">
+    </div>
+</div>
+<div ng-repeat="phone in model.phones" class="row">
+    <div class="col-md-4">
+        <div class="input-group">
+                        <span ng-click="deletePhone($index)"
+                              class="glyphicon glyphicon-minus input-group-addon"></span>
+            <input type="text"
+                   class="form-control"
+                   placeholder="414-444-4444"
+                   required
+                   ng-model="phone.number">
+        </div>
+    </div>
+    <div class="col-md-4">
+        <select ng-model="phone.type"
+                class="form-control"
+                ng-options="key as label for (key, label) in metaData.entity.phone.types"
+                ></select>
+    </div>
+    <div class="col-md-2">
+        <div class="radio-inline">
+            <label for="phone-primary-{{ $index }}">
+                <input type="radio"
+                       id="phone-primary-{{ $index }}"
+                       ng-model="phone.primary"
+                       ng-value="true"
+                       ng-click="primaryPhone($index)">
+                <span ng-show="phone.primary">Primary</span></label>
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        <button ng-click="addPhone()" class="form-control">Add</button>
+    </div>
+</div>
+<div ng-repeat="address in model.addresses">
+    <div class="row">
+        <div form-group class="col-md-12" label="Address Line 1">
+            <input type="text"
+                   id="address_line1"
+                   placeholder="Enter line1"
+                   required
+                   ng-model="address.line1">
+        </div>
+    </div>
+    <div class="row">
+        <div form-group class="col-md-12" label="Address Line 2">
+            <input type="text"
+                   id="address_line2"
+                   placeholder="Enter line2"
+                   ng-model="address.line2">
+        </div>
+    </div>
+    <div class="row">
+        <div form-group class="col-md-4" label="City">
+            <input type="text"
+                   id="city"
+                   placeholder="Enter city"
+                   required
+                   ng-model="address.city">
+        </div>
+        <div form-group class="col-md-4" label="State">
+            <select ng-model="address.state"
+                    id="state"
+                    ng-options="key as label for (key, label) in metaData.entity.address.states"
+                    ></select>
+        </div>
+        <div form-group class="col-md-4" label="Postal Code">
+            <input type="text"
+                   id="postalCode"
+                   placeholder="Enter postalCode"
+                   required
+                   ng-model="address.postalCode">
+        </div>
+    </div>
+</div>
+<div class="row">
+    <div form-group class="col-md-12" label="Notes">
+        <textarea id="notes"
+                  ng-model="model.notes"
+                  placeholder="Enter Notes"></textarea>
+    </div>
+</div>

@@ -75,13 +75,6 @@ class ClientInformationSerializer(serializers.ModelSerializer):
 class DonationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Donation
-        fields = (
-            'id',
-            'date',
-            'monetary_amount',
-            'type',
-            'notes',
-        )
 
 
 class DonorInformationSerializer(serializers.ModelSerializer):
@@ -124,7 +117,7 @@ class EntitySerializer(serializers.ModelSerializer):
     phones = PhoneSerializer(many=True, allow_add_remove=True)
     addresses = AddressSerializer(many=True, allow_add_remove=True)
     communications = CommunicationSerializer(many=True, allow_add_remove=True)
-    # donor_information = DonorInformationSerializer()
+    donor_information = DonorInformationSerializer(many=True, allow_add_remove=True)
     # client_information = ClientInformationSerializer()
     volunteer_information = VolunteerInformationSerializer(many=True, allow_add_remove=True)
 
@@ -141,7 +134,7 @@ class EntitySerializer(serializers.ModelSerializer):
             'phones',
             'addresses',
             'communications',
-            # 'donor_information',
+            'donor_information',
             # 'client_information',
             'volunteer_information',
         )

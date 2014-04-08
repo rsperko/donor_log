@@ -24,6 +24,14 @@ angular.module('trackingApp', [
         templateUrl: 'views/volunteer/list.html',
         controller: 'VolunteerListCtrl'
       })
+      .when('/donor/:id?', {
+        templateUrl: 'views/donor/main.html',
+        controller: 'DonorCtrl'
+      })
+      .when('/donors', {
+        templateUrl: 'views/donor/list.html',
+        controller: 'DonorListCtrl'
+      })
       .otherwise({
         redirectTo: '/'
       });

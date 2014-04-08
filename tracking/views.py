@@ -8,9 +8,11 @@ from rest_framework.response import Response
 from rest_framework import status
 
 from .models import Entity, \
-    Communication
+    Communication, \
+    Donation
 from .serializers import EntitySerializer, \
-    CommunicationSerializer
+    CommunicationSerializer, \
+    DonationSerializer
 
 
 class EntityFilter(django_filters.FilterSet):
@@ -19,10 +21,14 @@ class EntityFilter(django_filters.FilterSet):
     skills = django_filters.CharFilter(name='volunteer_information__skills__type', lookup_type='in')
     active = django_filters.BooleanFilter(name='volunteer_information__active', lookup_type='in')
     notes = django_filters.CharFilter(name='notes', lookup_type='icontains')
+    donation_types = django_filters.CharFilter(name='donor_information__donations__type', lookup_type='in')
+    donor_type = django_filters.CharFilter(name='donor_information__type', lookup_type='in')
+    donor_category = django_filters.CharFilter(name='donor_information__category', lookup_type='in')
 
     class Meta:
         model = Entity
-        fields = ['first_name', 'last_name', 'skills', 'active', 'notes']
+        fields = ['first_name', 'last_name', 'skills', 'active', 'notes', 'donation_types', 'donor_type',
+                  'donor_category']
 
 
 class EntityViewSet(viewsets.ModelViewSet):
@@ -78,3 +84,8 @@ class EntityViewSet(viewsets.ModelViewSet):
 class CommunicationViewSet(viewsets.ModelViewSet):
     queryset = Communication.objects.all()
     serializer_class = CommunicationSerializer
+
+
+class DonationViewSet(viewsets.ModelViewSet):
+    queryset = Donation.objects.all()
+    serializer_class = DonationSerializer

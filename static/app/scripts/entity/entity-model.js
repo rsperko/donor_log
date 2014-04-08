@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('trackingApp')
-  .factory('entityModel', function ($q, $filter, entityResource, communicationResource, volunteerModel) {
+  .factory('entityModel', function ($q, $filter, entityResource, communicationResource, volunteerModel, donorModel) {
 
       var Model = function (id, data) {
         var self = this;
@@ -20,7 +20,8 @@ angular.module('trackingApp')
             notes: '',
             phones: [],
             communications: [],
-            volunteer_information: []
+            volunteer_information: [],
+            donor_information: []
           };
         }
 
@@ -45,8 +46,12 @@ angular.module('trackingApp')
         var self = this;
         _.extend(self, data);
 
-        _.each(self.volunteer_information, function (vol_info, index) {
-          self.volunteer_information[index] = volunteerModel(vol_info.id, vol_info);
+        _.each(self.volunteer_information, function (info, index) {
+          self.volunteer_information[index] = volunteerModel(info.id, info);
+        });
+
+        _.each(self.donor_information, function (info, index) {
+          self.donor_information[index] = donorModel(info.id, info);
         });
       };
 
@@ -170,6 +175,13 @@ angular.module('trackingApp')
           this.volunteer_information.push(volunteerModel());
         }
         this.volunteer_information[0].ensureSkills();
+      };
+
+      Model.prototype.ensureDonorInformation = function () {
+        if (!this.donor_information.length) {
+          this.donor_information.push(donorModel());
+        }
+//        this.donor_information[0].ensureSkills();
       };
 
       Model.prototype.getName = function () {
