@@ -77,8 +77,19 @@ class DonationSerializer(serializers.ModelSerializer):
         model = Donation
 
 
+class DonorDonationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Donation
+        fields = (
+            'date',
+            'monetary_amount',
+            'type',
+            'notes',
+        )
+
+
 class DonorInformationSerializer(serializers.ModelSerializer):
-    donations = DonationSerializer(many=True, allow_add_remove=True)
+    donations = DonorDonationSerializer(many=True, allow_add_remove=True)
 
     class Meta:
         model = DonorInformation
