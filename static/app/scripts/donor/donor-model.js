@@ -12,6 +12,9 @@ angular.module('trackingApp')
       self.id = id;
       if (!data) {
         data = {
+          category: 'U',
+          type: 'D',
+          donations: []
         };
       }
       self.applyData(data);
@@ -52,6 +55,15 @@ angular.module('trackingApp')
       }
 
       return defer.promise;
+    };
+
+    Model.prototype.createDonation = function() {
+      return {
+        date: $filter('date')(new Date(), 'yyyy-MM-dd'),
+        monetary_amount: null,
+        type: 'F',
+        notes: null
+      };
     };
 
     return Model;

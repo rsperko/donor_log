@@ -19,6 +19,36 @@ angular.module('trackingApp')
               setupModels();
             });
           };
+
+          $scope.saveDonation = function () {
+            alertService.clear();
+            $scope.model.donor_information[0].donations.push($scope.currentDonation);
+            $scope.currentDonation = null;
+          };
+
+          $scope.cancelDonation = function () {
+            $scope.currentDonation = null;
+          };
+
+          $scope.deleteDonation = function (donationIndex) {
+            alertService.clear();
+            $scope.model.donor_information[0].donations.splice(donationIndex, 1);
+          };
+
+          $scope.editDonation = function (donationIndex) {
+            $scope.currentDonation = _.extend({}, $scope.model.donor_information[0].donations[donationIndex]);
+          };
+
+          $scope.donationDateOpen = function($event) {
+            $event.preventDefault();
+            $event.stopPropagation();
+
+            $scope.donationDateOpened = true;
+          };
+          
+          $scope.createDonation = function() {
+            $scope.currentDonation = $scope.model.donor_information[0].createDonation();
+          };
         },
 
         init = function (metaData) {

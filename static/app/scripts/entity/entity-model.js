@@ -181,7 +181,6 @@ angular.module('trackingApp')
         if (!this.donor_information.length) {
           this.donor_information.push(donorModel());
         }
-//        this.donor_information[0].ensureSkills();
       };
 
       Model.prototype.getName = function () {
