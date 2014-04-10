@@ -1,6 +1,14 @@
 <div name="donor-form" role="form">
     <div class="row">
         <div class="form-group col-md-3">
+            <label for="institution_name">Institution Name</label>
+            <input type="text"
+                   id="institution_name"
+                   class="form-control"
+                   placeholder="Search on Institution Name"
+                   ng-model="criteria.institution_name"/>
+        </div>
+        <div class="form-group col-md-3">
             <label for="first_name">First Name</label>
             <input type="text"
                    id="first_name"
@@ -24,23 +32,21 @@
                    placeholder="Search Notes"
                    ng-model="criteria.notes"/>
         </div>
-        <div class="form-group col-md-1">
-            <label for="active">Active</label>
-            <select id="active"
-                    class="form-control"
-                    ng-model="criteria.active">
-                <option value="" selected></option>
-                <option value="True">Yes</option>
-                <option value="False">No</option>
-                    </select>
+    </div>
+    <div class="row">
+        <div class="col-md-2" ng-repeat="(key, value) in metaData.donor.donor_information.categories">
+            <input type="checkbox"
+                   ng-model="categories[key]"
+                   id="categories-{{ key }}">
+            <label for="categories-{{ key }}">{{ value }}</label>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2" ng-repeat="(key, value) in metaData.donor.skill.types">
+        <div class="col-md-2" ng-repeat="(key, value) in metaData.donor.donor_information.types">
             <input type="checkbox"
-                   ng-model="skills[key]"
-                   id="skill-{{ key }}">
-            <label for="skill-{{ key }}">{{ value }}</label>
+                   ng-model="types[key]"
+                   id="type-{{ key }}">
+            <label for="type-{{ key }}">{{ value }}</label>
         </div>
     </div>
     <div class="row">

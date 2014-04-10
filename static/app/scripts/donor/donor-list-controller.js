@@ -4,26 +4,51 @@ angular.module('trackingApp')
   .controller('DonorListCtrl', function ($scope, metaDataService, entityResource, entityModel, alertService) {
 
     var setupModel = function () {
+        $scope.categories = {};
+        $scope.types = {};
         $scope.criteria = {
+          institution_name: '',
           first_name: '',
           last_name: '',
           notes: '',
-          donor_unset: '0'
+          donor_unset: '0',
         };
         $scope.results = [];
       },
 
       setupActions = function () {
-        function _buildSubmit() {
-          var submit = _.extend({}, $scope.criteria);
+        var _applyApplicableDonorCriteria = function (criteria) {
+            var selectedCategories = [];
+            _.each($scope.categories, function (value, key) {
+              if (value) {
+                selectedCategories.push(key);
+              }
+            });
+            criteria.donor_categories = selectedCategories.join();
 
-          $scope.results = [];
+            var selectedTypes = [];
+            _.each($scope.types, function (value, key) {
+              if (value) {
+                selectedTypes.push(key);
+              }
+            });
+            criteria.donor_types = selectedTypes.join();
 
-          return submit;
-        }
+            return criteria;
+          },
+
+          _buildSubmitCriteria = function () {
+            var criteria = _.extend({}, $scope.criteria);
+
+            $scope.results = [];
+
+            criteria = _applyApplicableDonorCriteria(criteria);
+
+            return criteria;
+          };
 
         $scope.search = function () {
-          var submit = _buildSubmit();
+          var submit = _buildSubmitCriteria();
 
           entityResource.query(submit).$promise.then(function (result) {
             _.each(result, function (entity) {

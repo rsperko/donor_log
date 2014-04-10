@@ -13,6 +13,7 @@ from .serializers import EntitySerializer, \
 
 
 class EntityFilter(django_filters.FilterSet):
+    institution_name = django_filters.CharFilter(name='institution_name', lookup_type='icontains')
     first_name = django_filters.CharFilter(name='first_name', lookup_type='icontains')
     last_name = django_filters.CharFilter(name='last_name', lookup_type='icontains')
     notes = django_filters.CharFilter(name='notes', lookup_type='icontains')
@@ -23,14 +24,14 @@ class EntityFilter(django_filters.FilterSet):
 
     donor_unset = django_filters.NumberFilter('donor_information__id', lookup_type='gt')
     donation_types = django_filters.CharFilter(name='donor_information__donations__type', lookup_type='in')
-    donor_type = django_filters.CharFilter(name='donor_information__type', lookup_type='in')
-    donor_category = django_filters.CharFilter(name='donor_information__category', lookup_type='in')
+    donor_types = django_filters.CharFilter(name='donor_information__type', lookup_type='in')
+    donor_categories = django_filters.CharFilter(name='donor_information__category', lookup_type='in')
 
     class Meta:
         model = Entity
-        fields = ['first_name', 'last_name', 'notes',
+        fields = ['institution_name', 'first_name', 'last_name', 'notes',
                   'volunteer_unset', 'skills', 'volunteer_active',
-                  'donor_unset', 'donation_types', 'donor_type', 'donor_category']
+                  'donor_unset', 'donation_types', 'donor_types', 'donor_categories']
 
 
 class EntityViewSet(viewsets.ModelViewSet):
