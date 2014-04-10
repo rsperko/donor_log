@@ -7,7 +7,8 @@ angular.module('trackingApp')
           $scope.criteria = {
             first_name: '',
             last_name: '',
-            notes: ''
+            notes: '',
+            donor_unset: '0'
           };
           $scope.results = [];
         },

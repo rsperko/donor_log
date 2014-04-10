@@ -56,6 +56,9 @@ class Entity(models.Model):
     volunteerinformation_link.allow_tags = True
     volunteerinformation_link.short_description = 'Volunteer Information'
 
+    def __unicode__(self):
+        return self.name()
+
 
 
 class Phone(models.Model):
