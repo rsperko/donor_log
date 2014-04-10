@@ -5,8 +5,6 @@
     <div class="col-md-9">
 
         <form name="donor-form" role="form">
-            <ng-include src="'views/entity/entity_main.html'"></ng-include>
-
             <div class="row">
                 <div form-group class="col-md-4" label="Category">
                     <select ng-model="model.donor_information[0].category"
@@ -21,6 +19,18 @@
                             ></select>
                 </div>
             </div>
+
+            <div class="row" ng-if="! model.donor_information[0].isIndividual()">
+                <div form-group class="col-md-12" label="Institution Name">
+                    <input type="text"
+                           id="institution_name"
+                           placeholder="Enter Institution Name"
+                           required
+                           ng-model="model.institution_name">
+                </div>
+            </div>
+
+            <ng-include src="'views/entity/entity_main.html'"></ng-include>
 
             <hr>
             <h4>Donations</h4>

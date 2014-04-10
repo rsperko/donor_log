@@ -9,7 +9,8 @@ angular.module('trackingApp')
             first_name: '',
             last_name: '',
             skills: '',
-            notes: ''
+            notes: '',
+            is_volunteer: null
           };
           $scope.results = [];
           _.each(metaData.volunteer.skill.types, function (value, key) {
@@ -18,23 +19,31 @@ angular.module('trackingApp')
         },
 
         setupActions = function () {
-          function _buildSubmit() {
-            var submit = _.extend({}, $scope.criteria);
-
-            $scope.results = [];
-
+          var _applyApplicableVolunteerCriteria = function(criteria) {
             var selectedSkills = [];
-            _.each($scope.skills, function (value, key) {
-              if (value) {
-                selectedSkills.push(key);
+              if(criteria.is_volunteer === 'True') {
+                _.each($scope.skills, function (value, key) {
+                  if (value) {
+                    selectedSkills.push(key);
+                  }
+                });
+                criteria.skills = selectedSkills.join();
               }
-            });
-            submit.skills = selectedSkills.join();
-            return submit;
-          }
+              return criteria;
+            },
+
+            _buildSubmitCriteria = function() {
+              var criteria = _.extend({}, $scope.criteria);
+
+              $scope.results = [];
+
+              criteria = _applyApplicableVolunteerCriteria(criteria);
+
+              return criteria;
+            };
 
           $scope.search = function () {
-            var submit = _buildSubmit();
+            var submit = _buildSubmitCriteria();
 
             entityResource.query(submit).$promise.then(function (result) {
               _.each(result, function (entity) {

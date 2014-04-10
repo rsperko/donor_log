@@ -12,7 +12,7 @@ angular.module('trackingApp')
       self.id = id;
       if (!data) {
         data = {
-          category: 'U',
+          category: 'I',
           type: 'D',
           donations: []
         };
@@ -64,6 +64,10 @@ angular.module('trackingApp')
         type: 'F',
         notes: null
       };
+    };
+
+    Model.prototype.isIndividual = function() {
+      return this.category === 'I';
     };
 
     return Model;

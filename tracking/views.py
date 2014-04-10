@@ -3,7 +3,6 @@ from rest_framework import filters
 import django_filters
 
 # Create your views here.
-from rest_framework.mixins import CreateModelMixin
 
 from .models import Entity, \
     Communication, \
@@ -17,7 +16,7 @@ class EntityFilter(django_filters.FilterSet):
     first_name = django_filters.CharFilter(name='first_name', lookup_type='icontains')
     last_name = django_filters.CharFilter(name='last_name', lookup_type='icontains')
     skills = django_filters.CharFilter(name='volunteer_information__skills__type', lookup_type='in')
-    active = django_filters.BooleanFilter(name='volunteer_information__active', lookup_type='in')
+    volunteer_active = django_filters.BooleanFilter(name='volunteer_information__active', lookup_type='in')
     notes = django_filters.CharFilter(name='notes', lookup_type='icontains')
     donation_types = django_filters.CharFilter(name='donor_information__donations__type', lookup_type='in')
     donor_type = django_filters.CharFilter(name='donor_information__type', lookup_type='in')
@@ -25,7 +24,7 @@ class EntityFilter(django_filters.FilterSet):
 
     class Meta:
         model = Entity
-        fields = ['first_name', 'last_name', 'skills', 'active', 'notes', 'donation_types', 'donor_type',
+        fields = ['first_name', 'last_name', 'skills', 'volunteer_active', 'notes', 'donation_types', 'donor_type',
                   'donor_category']
 
 
