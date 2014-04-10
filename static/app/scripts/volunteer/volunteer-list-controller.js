@@ -21,14 +21,12 @@ angular.module('trackingApp')
         setupActions = function () {
           var _applyApplicableVolunteerCriteria = function(criteria) {
             var selectedSkills = [];
-              if(criteria.is_volunteer === 'True') {
-                _.each($scope.skills, function (value, key) {
-                  if (value) {
-                    selectedSkills.push(key);
-                  }
-                });
-                criteria.skills = selectedSkills.join();
-              }
+              _.each($scope.skills, function (value, key) {
+                if (value) {
+                  selectedSkills.push(key);
+                }
+              });
+              criteria.skills = selectedSkills.join();
               return criteria;
             },
 
