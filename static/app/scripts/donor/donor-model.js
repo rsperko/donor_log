@@ -70,5 +70,16 @@ angular.module('trackingApp')
       return this.category === 'I';
     };
 
+    Model.prototype.getTotalDonated = function() {
+      var self = this,
+        result = 0.00;
+
+      _.each(self.donations, function(donation) {
+        result += donation.monetary_amount;
+      });
+
+      return result;
+    };
+
     return Model;
   });

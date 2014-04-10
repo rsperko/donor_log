@@ -60,7 +60,7 @@
                             <th>Name</th>
                             <th>Primary Phone</th>
                             <th>email</th>
-                            <th>Active</th>
+                            <th>Total Donated</th>
                             <th>Notes</th>
                         </tr>
                     </thead>
@@ -69,7 +69,7 @@
                             <td class="col-md-2"><a href="#/donor/{{ entity.id }}">{{ entity.getName() }}</a></td>
                             <td class="col-md-2">{{ entity.getPrimaryPhone() }}</td>
                             <td class="col-md-2">{{ entity.email }}</td>
-                            <td class="col-md-1">{{ entity.volunteer_information[0].active }}</td>
+                            <td class="col-md-1">{{ entity.donor_information[0].getTotalDonated() | currency: "$" }}</td>
                             <td class="col-md-5 overflow" style="max-width: 200px">{{ entity.notes }}</td>
                         </tr>
                     </tbody>
